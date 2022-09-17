@@ -1,3 +1,21 @@
 Full Stack Web Development Course - ReactJS, NodeJS, Express, MySQL
 https://www.youtube.com/playlist?list=PLpPqplz6dKxUaZ630TY1BFIo5nP-_x-nL
 https://github.com/machadop1407/FullStack-Course
+
+1 Introduction
+2 GET and POST Requests
+3 Connecting React to NodeJS
+4 Form Validation
+5 Individual Pages Based on ID
+6 Associations in Sequelize
+7 Comment Section in React
+8 Registration and Login
+9 JWT Authentication
+10 Auth in the Frontend
+11 Logging Out
+12 Liking System
+13 Page Not Found
+14 Delete a Post
+15 Profile Page
+16 Update Password
+17 Deploying the Website
