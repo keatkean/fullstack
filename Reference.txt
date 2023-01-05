@@ -27,3 +27,6 @@ React.js CRUD App with React Router & Axios
 https://github.com/bezkoder/react-crud-web-api
 Node.js Rest APIs with Express, Sequelize & MySQL example
 https://github.com/bezkoder/nodejs-express-sequelize-mysql
+
+Sequelize
+https://sequelize.org/docs/v6/core-concepts/model-basics/
