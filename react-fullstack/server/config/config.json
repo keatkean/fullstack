@@ -4,7 +4,9 @@
     "password": "mysql",
     "database": "storybook",
     "host": "localhost",
-    "dialect": "mysql"
+    "dialect": "mysql",
+    "logging": false,
+    "timezone": "+08:00"
   },
   "test": {
     "username": "root",
