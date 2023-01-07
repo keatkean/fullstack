@@ -1,6 +1,6 @@
 import React from 'react'
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
 
 function Home() {
     const [postList, setPostList] = useState([]);
@@ -14,13 +14,16 @@ function Home() {
 
     return (
         <div>
+            <div>StoryBook</div>
             {
                 postList.map((post, i) => {
-                    return <div key={post.id}>
-                        <div>{post.title}</div>
-                        <div>{post.description}</div>
-                        <div>{post.username}</div>
-                    </div>;
+                    return (
+                        <div key={post.id}>
+                            <div>{post.title}</div>
+                            <div>{post.description}</div>
+                            <div>{post.username}</div>
+                        </div>
+                    );
                 })
             }
         </div>
