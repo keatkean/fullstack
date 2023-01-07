@@ -1,29 +1,16 @@
 //import logo from './logo.svg';
 //import './App.css';
-import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Home from './pages/Home'
 
 function App() {
-  const [postList, setPostList] = useState([]);
-
-  useEffect(() => {
-    axios.get("http://localhost:3001/post/list").then((res) => {
-      //console.log(res.data);
-      setPostList(res.data);
-    })
-  }, []);
-
   return (
     <div className="App">
-      {
-        postList.map((post, i) => {
-          return <div key={post.id}>
-            <div>{post.title}</div>
-            <div>{post.description}</div>
-            <div>{post.username}</div>
-          </div>;
-        })
-      }
+      <Router>
+        <Routes>
+          <Route path="/" exact element={<Home />} />
+        </Routes>
+      </Router>
     </div>
   );
 }
