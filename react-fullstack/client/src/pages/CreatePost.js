@@ -2,12 +2,22 @@ import React from 'react'
 import { useState } from 'react';
 
 function CreatePost() {
-    const [title, setTitle] = useState("");
-    const [description, setDescription] = useState("");
+    const [post, setPost] = useState(
+        {
+            title: "",
+            description: ""
+        }
+    );
+
+    const handleChange = (event) => {
+        const name = event.target.name;
+        const value = event.target.value;
+        setPost(values => ({ ...values, [name]: value }))
+    };
 
     const onSubmit = (event) => {
         event.preventDefault();
-        alert(`You have entered: ${title} ${description}`);
+        alert(`You have entered: ${post.title} ${post.description}`);
     }
 
     return (
@@ -17,15 +27,17 @@ function CreatePost() {
                 <div>
                     <label>Title:</label>
                     <input
-                        value={title}
-                        onChange={(e) => setTitle(e.target.value)}
+                        name="title"
+                        value={post.title}
+                        onChange={handleChange}
                     />
                 </div>
                 <div>
                     <label>Descrition:</label>
                     <input
-                        value={description}
-                        onChange={(e) => setDescription(e.target.value)}
+                        name="description"
+                        value={post.description}
+                        onChange={handleChange}
                     />
                 </div>
                 <div>
