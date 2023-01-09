@@ -30,7 +30,6 @@ function Post() {
         const name = event.target.name;
         const value = event.target.value;
         setComment(values => ({ ...values, [name]: value }));
-
     };
 
     const onSubmit = (event) => {
