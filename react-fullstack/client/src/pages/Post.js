@@ -25,7 +25,7 @@ function Post() {
     }, []);
 
     const initialValues = {
-        PostId: id,
+        postId: id,
         text: ""
     };
 
