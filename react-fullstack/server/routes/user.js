@@ -1,7 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
+const { sign } = require('jsonwebtoken');
 const { User } = require('../models');
+require('dotenv').config();
 
 router.post("/register", async (req, res) => {
     let { username, password } = req.body;
@@ -40,7 +42,11 @@ router.post("/login", async (req, res) => {
         return;
     }
 
-    res.json({});
+    let token = sign({
+        id: user.id,
+        username: user.username
+    }, process.env.APP_SECRET);
+    res.json({ accessToken: token });
 });
 
 module.exports = router;
