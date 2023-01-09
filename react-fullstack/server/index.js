@@ -6,6 +6,8 @@ const cors = require('cors');
 app.use(cors());
 
 // Routers
+const userRouter = require('./routes/user');
+app.use("/user", userRouter);
 const postRouter = require('./routes/post');
 app.use("/post", postRouter);
 const commentRouter = require('./routes/comment');
