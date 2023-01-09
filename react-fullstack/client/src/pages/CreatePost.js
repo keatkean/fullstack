@@ -16,7 +16,9 @@ function CreatePost() {
         setPost(values => ({ ...values, [name]: value }))
     };
 
-    const createPost = (event) => {
+    const onSubmit = (event) => {
+        event.preventDefault();
+        //alert(`You have entered: ${post.title} ${post.description}`);
         axios.post("/post/create", post).then((res) => {
             console.log(res.data);
             navigate("/");
@@ -26,7 +28,7 @@ function CreatePost() {
     return (
         <div>
             <div>Create Post</div>
-            <div>
+            <form onSubmit={onSubmit}>
                 <div>
                     <label>Title:</label>
                     <input
@@ -44,9 +46,9 @@ function CreatePost() {
                     />
                 </div>
                 <div>
-                    <button onClick={createPost}>Create Post</button>
+                    <input type="submit" value="Add Post" />
                 </div>
-            </div>
+            </form>
         </div>
     )
 }
