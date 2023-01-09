@@ -16,7 +16,7 @@ function Home() {
 
     return (
         <div>
-            <div>StoryBook</div>
+            <div>StoryBook</div><br/>
             {
                 postList.map((post, i) => {
                     return (
