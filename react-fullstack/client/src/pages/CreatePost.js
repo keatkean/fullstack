@@ -1,25 +1,24 @@
 import React from 'react';
-import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
 
 function CreatePost() {
-    const [post, setPost] = useState({
-        title: "",
-        description: ""
-    });
     const navigate = useNavigate();
 
-    const handleChange = (event) => {
-        const name = event.target.name;
-        const value = event.target.value;
-        setPost(values => ({ ...values, [name]: value }))
+    const initialValues = {
+        title: "",
+        description: ""
     };
 
-    const onSubmit = (event) => {
-        event.preventDefault();
-        //alert(`You have entered: ${post.title} ${post.description}`);
-        axios.post("/post/create", post).then((res) => {
+    const validationSchema = Yup.object().shape({
+        title: Yup.string().max(100).required(),
+        description: Yup.string().max(500).required()
+    });
+
+    const onSubmit = (data) => {
+        axios.post("/post/create", data).then((res) => {
             console.log(res.data);
             navigate("/");
         });
@@ -28,27 +27,23 @@ function CreatePost() {
     return (
         <div>
             <div>Create Post</div>
-            <form onSubmit={onSubmit}>
-                <div>
-                    <label>Title:</label>
-                    <input
-                        name="title"
-                        value={post.title}
-                        onChange={handleChange}
-                    />
-                </div>
-                <div>
-                    <label>Descrition:</label>
-                    <input
-                        name="description"
-                        value={post.description}
-                        onChange={handleChange}
-                    />
-                </div>
-                <div>
-                    <input type="submit" value="Add Post" />
-                </div>
-            </form>
+            <Formik initialValues={initialValues}
+                validationSchema={validationSchema}
+                onSubmit={onSubmit} >
+                <Form>
+                    <div>
+                        <label>Title:</label>
+                        <Field name="title" />
+                        <ErrorMessage name="title" component="span" />
+                    </div>
+                    <div>
+                        <label>Descrition:</label>
+                        <Field name="description" />
+                        <ErrorMessage name="description" component="span" />
+                    </div>
+                    <button type="submit">Create Post</button>
+                </Form>
+            </Formik>
         </div>
     )
 }

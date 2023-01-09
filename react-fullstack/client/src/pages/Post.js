@@ -2,14 +2,12 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
 
 function Post() {
     let { id } = useParams();
     const [post, setPost] = useState({});
-    const [comment, setComment] = useState({
-        PostId: id,
-        text: ""
-    });
     const [commentList, setCommentList] = useState([]);
 
     useEffect(() => {
@@ -26,17 +24,19 @@ function Post() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    const handleChange = (event) => {
-        const name = event.target.name;
-        const value = event.target.value;
-        setComment(values => ({ ...values, [name]: value }));
+    const initialValues = {
+        PostId: id,
+        text: ""
     };
 
-    const onSubmit = (event) => {
-        event.preventDefault();
-        axios.post("/comment/create", comment).then((res) => {
+    const validationSchema = Yup.object().shape({
+        text: Yup.string().max(500).required()
+    });
+
+    const onSubmit = (data, { resetForm }) => {
+        axios.post("/comment/create", data).then((res) => {
             console.log(res.data);
-            setComment(values => ({ ...values, text: "" }));
+            resetForm();
             setCommentList([res.data, ...commentList]);
         });
     };
@@ -52,19 +52,19 @@ function Post() {
 
             <div>
                 <div>
-                    <form onSubmit={onSubmit}>
-                        <div>
-                            <input
-                                name="text"
-                                value={comment.text}
-                                onChange={handleChange}
-                            />
-                        </div>
-                        <div>
-                            <input type="submit" value="Add Comment" />
-                        </div>
-                    </form>
-                </div><br />
+                    <Formik initialValues={initialValues}
+                        validationSchema={validationSchema}
+                        onSubmit={onSubmit} >
+                        <Form>
+                            <div>
+                                <Field name="text" />
+                                <ErrorMessage name="text" component="span" />
+                            </div>
+                            <button type="submit">Add Comment</button>
+                        </Form>
+                    </Formik>
+                </div>
+                <br />
                 <div>
                     {
                         commentList.map((comment, i) => {
