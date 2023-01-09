@@ -1,5 +1,4 @@
-import React from 'react'
-import { useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
@@ -7,7 +6,6 @@ import * as Yup from 'yup';
 
 function Login() {
     const navigate = useNavigate();
-    const [error, setError] = useState("");
 
     const initialValues = {
         username: "",
@@ -20,15 +18,14 @@ function Login() {
     });
 
     const onSubmit = (data) => {
-        axios.post("/user/login", data).then((res) => {
-            if (res.data.error) {
-                setError(res.data.error);
-            }
-            else {
+        axios.post("/user/login", data)
+            .then((res) => {
                 sessionStorage.setItem("accessToken", res.data.accessToken);
                 navigate("/");
-            }
-        });
+            })
+            .catch(function (error) {
+                alert(error.response.data.message);
+            });
     };
 
     return (
@@ -48,7 +45,6 @@ function Login() {
                         <Field name="password" type="password" />
                         <ErrorMessage name="password" component="span" />
                     </div>
-                    <div>{error}</div>
                     <button type="submit">Login</button>
                 </Form>
             </Formik>

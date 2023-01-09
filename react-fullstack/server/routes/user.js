@@ -11,7 +11,7 @@ router.post("/register", async (req, res) => {
         where: { username: username }
     });
     if (user) {
-        res.json({ error: "Username already exists." });
+        res.status(400).json({ message: "Username already exists." });
         return;
     }
 
@@ -31,14 +31,14 @@ router.post("/login", async (req, res) => {
         where: { username: username }
     });
     if (!user) {
-        res.json({ error: errorMsg });
+        res.status(400).json({ message: errorMsg });
         return;
     }
 
     //console.log(user.toJSON());
     let match = await bcrypt.compare(password, user.password);
     if (!match) {
-        res.json({ error: errorMsg });
+        res.status(400).json({ message: errorMsg });
         return;
     }
 
