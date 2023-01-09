@@ -19,7 +19,7 @@ function CreatePost() {
     const onSubmit = (event) => {
         event.preventDefault();
         //alert(`You have entered: ${post.title} ${post.description}`);
-        axios.post("http://localhost:3001/post/create", post).then((res) => {
+        axios.post("/post/create", post).then((res) => {
             console.log(res.data);
         });
     }

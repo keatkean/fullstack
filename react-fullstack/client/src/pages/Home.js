@@ -6,7 +6,7 @@ function Home() {
     const [postList, setPostList] = useState([]);
 
     useEffect(() => {
-        axios.get("http://localhost:3001/post/list").then((res) => {
+        axios.get("/post/list").then((res) => {
             //console.log(res.data);
             setPostList(res.data);
         });
