@@ -1,5 +1,6 @@
 import React from 'react'
 import { useState } from 'react';
+import axios from 'axios';
 
 function CreatePost() {
     const [post, setPost] = useState(
@@ -17,7 +18,10 @@ function CreatePost() {
 
     const onSubmit = (event) => {
         event.preventDefault();
-        alert(`You have entered: ${post.title} ${post.description}`);
+        //alert(`You have entered: ${post.title} ${post.description}`);
+        axios.post("http://localhost:3001/post/create", post).then((res) => {
+            console.log(res.data);
+        });
     }
 
     return (

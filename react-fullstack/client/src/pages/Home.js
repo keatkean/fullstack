@@ -1,6 +1,6 @@
 import React from 'react'
-import axios from 'axios';
 import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 function Home() {
     const [postList, setPostList] = useState([]);
@@ -9,7 +9,7 @@ function Home() {
         axios.get("http://localhost:3001/post/list").then((res) => {
             //console.log(res.data);
             setPostList(res.data);
-        })
+        });
     }, []);
 
     return (

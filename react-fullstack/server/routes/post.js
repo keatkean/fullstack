@@ -9,6 +9,7 @@ router.get("/list", async (req, res) => {
 
 router.post("/create", async (req, res) => {
     const post = req.body;
+    post.username = "alex";
     let result = await Post.create(post);
     res.json(result);
 })
