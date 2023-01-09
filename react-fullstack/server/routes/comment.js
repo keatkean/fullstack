@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { Comment } = require('../models');
+const { validateToken } = require('../middlewares/auth');
 
 router.get("/list/:postId", async (req, res) => {
     let postId = req.params.postId;
@@ -11,11 +12,10 @@ router.get("/list/:postId", async (req, res) => {
     res.json(list);
 });
 
-router.post("/create", async (req, res) => {
+router.post("/create", validateToken, async (req, res) => {
     let comment = req.body;
-    if (!comment.username) {
-        comment.username = "alex";
-    }
+    comment.UserId = req.UserId;
+    comment.username = req.username;
     let result = await Comment.create(comment);
     res.json(result);
 });

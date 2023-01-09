@@ -25,6 +25,7 @@ function Login() {
                 setError(res.data.error);
             }
             else {
+                sessionStorage.setItem("accessToken", res.data.accessToken);
                 navigate("/");
             }
         });

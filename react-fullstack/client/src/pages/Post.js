@@ -35,7 +35,7 @@ function Post() {
 
     const onSubmit = (data, { resetForm }) => {
         axios.post("/comment/create", data).then((res) => {
-            console.log(res.data);
+            console.log(res);
             resetForm();
             setCommentList([res.data, ...commentList]);
         });
