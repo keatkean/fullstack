@@ -42,11 +42,11 @@ router.post("/login", async (req, res) => {
         return;
     }
 
-    let token = sign({
+    let accessToken = sign({
         id: user.id,
         username: user.username
     }, process.env.APP_SECRET);
-    res.json({ token: token });
+    res.json({ accessToken: accessToken });
 });
 
 module.exports = router;
