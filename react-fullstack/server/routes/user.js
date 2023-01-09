@@ -46,7 +46,7 @@ router.post("/login", async (req, res) => {
         id: user.id,
         username: user.username
     }, process.env.APP_SECRET);
-    res.json({ accessToken: token });
+    res.json({ token: token });
 });
 
 module.exports = router;
