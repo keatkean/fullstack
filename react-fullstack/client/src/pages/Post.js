@@ -30,11 +30,9 @@ function Post() {
         const name = event.target.name;
         const value = event.target.value;
         setComment(values => ({ ...values, [name]: value }));
-
     };
 
-    const onSubmit = (event) => {
-        event.preventDefault();
+    const addComment = (event) => {
         axios.post("/comment/create", comment).then((res) => {
             console.log(res.data);
             setComment(values => ({ ...values, text: "" }));
@@ -53,18 +51,16 @@ function Post() {
 
             <div>
                 <div>
-                    <form onSubmit={onSubmit}>
-                        <div>
-                            <input
-                                name="text"
-                                value={comment.text}
-                                onChange={handleChange}
-                            />
-                        </div>
-                        <div>
-                            <input type="submit" value="Add Comment" />
-                        </div>
-                    </form>
+                    <div>
+                        <input
+                            name="text"
+                            value={comment.text}
+                            onChange={handleChange}
+                        />
+                    </div>
+                    <div>
+                        <button onClick={addComment}>Add Comment</button>
+                    </div>
                 </div><br />
                 <div>
                     {
