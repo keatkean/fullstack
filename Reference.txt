@@ -30,3 +30,5 @@ https://github.com/bezkoder/nodejs-express-sequelize-mysql
 
 Sequelize
 https://sequelize.org/docs/v6/core-concepts/model-basics/
+React Forms
+https://www.w3schools.com/react/react_forms.asp

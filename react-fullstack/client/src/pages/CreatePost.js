@@ -4,12 +4,10 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 function CreatePost() {
-    const [post, setPost] = useState(
-        {
-            title: "",
-            description: ""
-        }
-    );
+    const [post, setPost] = useState({
+        title: "",
+        description: ""
+    });
     const navigate = useNavigate();
 
     const handleChange = (event) => {
@@ -25,7 +23,7 @@ function CreatePost() {
             console.log(res.data);
             navigate("/");
         });
-    }
+    };
 
     return (
         <div>
@@ -48,7 +46,7 @@ function CreatePost() {
                     />
                 </div>
                 <div>
-                    <input type="submit" value="Create Post" />
+                    <input type="submit" value="Add Post" />
                 </div>
             </form>
         </div>
