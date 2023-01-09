@@ -1,5 +1,6 @@
-import React from 'react'
+import React from 'react';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 function CreatePost() {
@@ -9,6 +10,7 @@ function CreatePost() {
             description: ""
         }
     );
+    const navigate = useNavigate();
 
     const handleChange = (event) => {
         const name = event.target.name;
@@ -21,6 +23,7 @@ function CreatePost() {
         //alert(`You have entered: ${post.title} ${post.description}`);
         axios.post("/post/create", post).then((res) => {
             console.log(res.data);
+            navigate("/");
         });
     }
 

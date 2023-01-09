@@ -1,9 +1,11 @@
-import React from 'react'
+import React from 'react';
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 function Home() {
     const [postList, setPostList] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         axios.get("/post/list").then((res) => {
@@ -18,10 +20,10 @@ function Home() {
             {
                 postList.map((post, i) => {
                     return (
-                        <div key={post.id}>
+                        <div key={post.id} onClick={() => { navigate(`/post/${post.id}`) }}>
                             <div>{post.title}</div>
                             <div>{post.description}</div>
-                            <div>{post.username}</div>
+                            <div>{post.username}</div><br/>
                         </div>
                     );
                 })
