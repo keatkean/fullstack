@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
+import moment from 'moment';
 
 function Post() {
     let { id } = useParams();
@@ -47,7 +48,7 @@ function Post() {
                 <div>{post.title}</div>
                 <div>{post.description}</div>
                 <div>{post.username}</div>
-                <div>{post.createdAt}</div><br />
+                <div>{moment(post.updatedAt).format("D MMM YYYY HH:mm:ss")}</div><br />
             </div>
 
             <div>
