@@ -20,7 +20,7 @@ function Login() {
     const onSubmit = (data) => {
         axios.post("/user/login", data)
             .then((res) => {
-                sessionStorage.setItem("accessToken", res.data.accessToken);
+                localStorage.setItem("accessToken", res.data.accessToken);
                 navigate("/");
             })
             .catch(function (error) {

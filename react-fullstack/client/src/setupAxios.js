@@ -6,7 +6,7 @@ function setupAxios() {
     // Add a request interceptor
     axios.interceptors.request.use(function (config) {
         // Do something before request is sent
-        let accessToken = sessionStorage.getItem("accessToken");
+        let accessToken = localStorage.getItem("accessToken");
         if (accessToken) {
             config.headers["Authorization"] = `Bearer ${accessToken}`;
         }
@@ -27,7 +27,7 @@ function setupAxios() {
         // Do something with response error
         console.log(error.response);
         if (error.response.status === 401) {
-            sessionStorage.clear();
+            localStorage.clear();
             window.location.replace("/login");
         }
         return Promise.reject(error);
