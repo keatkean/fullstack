@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { Post } = require('../models');
+const { validateToken } = require('../middlewares/auth');
 
 router.get("/list", async (req, res) => {
     let list = await Post.findAll({
@@ -15,11 +16,10 @@ router.get("/details/:id", async (req, res) => {
     res.json(post);
 });
 
-router.post("/create", async (req, res) => {
+router.post("/create", validateToken, async (req, res) => {
     let post = req.body;
-    if (!post.username) {
-        post.username = "alex";
-    }
+    post.userId = req.userId;
+    post.username = req.username;
     let result = await Post.create(post);
     res.json(result);
 });
