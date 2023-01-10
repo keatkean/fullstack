@@ -17,17 +17,22 @@ function App() {
     }
   }, []);
 
+  const logout = () => {
+    localStorage.clear();
+    setAuthState(false);
+  };
+
   return (
     <div className="App">
       <AuthContext.Provider value={{ authState, setAuthState }}>
         <Router>
           <Link to="/">Home</Link>
-          {authState && (
+          {authState ? (
             <>
               <Link to="/createPost">Create Post</Link>
+              <button onClick={logout}>Logout</button>
             </>
-          )}
-          {!authState && (
+          ) : (
             <>
               <Link to="register">Register</Link>
               <Link to="login">Login</Link>
