@@ -25,9 +25,6 @@ function CreatePost() {
             })
             .catch(function (error) {
                 console.log(error.response);
-                if (error.response.status === 401) {
-                    navigate("/login");
-                }
             });
     };
 
