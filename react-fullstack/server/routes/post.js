@@ -18,8 +18,8 @@ router.get("/details/:id", async (req, res) => {
 
 router.post("/create", validateToken, async (req, res) => {
     let post = req.body;
-    post.userId = req.userId;
-    post.username = req.username;
+    post.userId = req.user.id;
+    post.username = req.user.username;
     let result = await Post.create(post);
     res.json(result);
 });
