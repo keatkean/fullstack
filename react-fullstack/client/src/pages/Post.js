@@ -1,13 +1,15 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import moment from 'moment';
 
 function Post() {
-    let { id } = useParams();
+    const { id } = useParams();
+    const navigate = useNavigate();
+
     const [post, setPost] = useState({});
     const [commentList, setCommentList] = useState([]);
 
@@ -37,12 +39,15 @@ function Post() {
     const onSubmit = (data, { resetForm }) => {
         axios.post("/comment/create", data)
             .then((res) => {
-                console.log(res);
+                console.log(res.data);
                 resetForm();
                 setCommentList([res.data, ...commentList]);
             })
             .catch(function (error) {
                 console.log(error.response);
+                if (error.response.status === 401) {
+                    navigate("/login");
+                }
             });
     };
 
