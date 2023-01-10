@@ -18,10 +18,14 @@ function CreatePost() {
     });
 
     const onSubmit = (data) => {
-        axios.post("/post/create", data).then((res) => {
-            console.log(res.data);
-            navigate("/");
-        });
+        axios.post("/post/create", data)
+            .then((res) => {
+                console.log(res.data);
+                navigate("/");
+            })
+            .catch(function (error) {
+                console.log(error.response);
+            });
     };
 
     return (
@@ -37,7 +41,7 @@ function CreatePost() {
                         <ErrorMessage name="title" component="span" />
                     </div>
                     <div>
-                        <label>Descrition:</label>
+                        <label>Description:</label>
                         <Field name="description" />
                         <ErrorMessage name="description" component="span" />
                     </div>
