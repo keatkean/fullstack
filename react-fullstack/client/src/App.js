@@ -9,17 +9,26 @@ import { AuthContext } from './helpers/AuthContext';
 import { useState, useEffect } from 'react';
 
 function App() {
-  const [authState, setAuthState] = useState(false);
+  const [authState, setAuthState] = useState({
+    username: "",
+    status: false
+  });
 
   useEffect(() => {
     if (localStorage.getItem("accessToken")) {
-      setAuthState(true);
+      setAuthState({
+        username: localStorage.getItem("username"),
+        status: true
+      });
     }
   }, []);
 
   const logout = () => {
     localStorage.clear();
-    setAuthState(false);
+    setAuthState({
+      username: "",
+      status: false
+    });
   };
 
   return (
@@ -27,9 +36,10 @@ function App() {
       <AuthContext.Provider value={{ authState, setAuthState }}>
         <Router>
           <Link to="/">Home</Link>
-          {authState ? (
+          {authState.status ? (
             <>
               <Link to="/createPost">Create Post</Link>
+              <label>{authState.username}</label>
               <button onClick={logout}>Logout</button>
             </>
           ) : (

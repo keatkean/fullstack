@@ -23,7 +23,11 @@ function Login() {
         axios.post("/user/login", data)
             .then((res) => {
                 localStorage.setItem("accessToken", res.data.accessToken);
-                setAuthState(true);
+                localStorage.setItem("username", res.data.username);
+                setAuthState({
+                    username: localStorage.getItem("username"),
+                    status: true
+                  });
                 navigate("/");
             })
             .catch(function (error) {
