@@ -12,7 +12,6 @@ function App() {
   const [authState, setAuthState] = useState(false);
 
   useEffect(() => {
-    console.log("App use effect...");
     if (localStorage.getItem("accessToken")) {
       setAuthState(true);
     }
@@ -23,7 +22,11 @@ function App() {
       <AuthContext.Provider value={{ authState, setAuthState }}>
         <Router>
           <Link to="/">Home</Link>
-          <Link to="/createPost">Create Post</Link>
+          {authState && (
+            <>
+              <Link to="/createPost">Create Post</Link>
+            </>
+          )}
           {!authState && (
             <>
               <Link to="register">Register</Link>
