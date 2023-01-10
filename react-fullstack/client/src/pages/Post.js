@@ -52,7 +52,7 @@ function Post() {
                 <div>{post.title}</div>
                 <div>{post.description}</div>
                 <div>{post.username}</div>
-                <div>{moment(post.updatedAt).format("D MMM YYYY HH:mm:ss")}</div><br />
+                <div>{moment(post.updatedAt).format(process.env.REACT_APP_DATETIME_FORMAT)}</div><br />
             </div>
 
             <div>
