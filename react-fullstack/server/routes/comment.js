@@ -20,4 +20,26 @@ router.post("/create", validateToken, async (req, res) => {
     res.json(result);
 });
 
+router.post("/delete", validateToken, async (req, res) => {
+    let id = req.body.id;
+    let comment = await Comment.findByPk(id);
+    if (!comment) {
+        res.status(400).json({
+            message: "Comment is not found."
+        });
+        return;
+    }
+    
+    if (comment.userId != req.user.id) {
+        res.sendStatus(403);
+        return;
+    }
+
+    let result = await Comment.destroy({
+        where: { id: id }
+    })
+    console.log(`${result} comment deleted`);
+    res.sendStatus(200);
+})
+
 module.exports = router;
