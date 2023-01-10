@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import moment from 'moment';
+import { AuthContext } from '../helpers/AuthContext';
 
 function Post() {
     const { id } = useParams();
+    const { authState } = useContext(AuthContext);
 
     const [post, setPost] = useState({});
     const [commentList, setCommentList] = useState([]);
@@ -47,6 +49,19 @@ function Post() {
             });
     };
 
+    const deleteComment = (id) => {
+        axios.post("/comment/delete", { id: id })
+            .then((res) => {
+                console.log(res.data);
+                setCommentList(commentList.filter((val) => {
+                    return val.id !== id;
+                }));
+            })
+            .catch(function (error) {
+                console.log(error.response);
+            });
+    }
+
     return (
         <div>
             <div>
@@ -57,27 +72,35 @@ function Post() {
             </div>
 
             <div>
-                <div>
-                    <Formik initialValues={initialValues}
-                        validationSchema={validationSchema}
-                        onSubmit={onSubmit} >
-                        <Form>
-                            <div>
-                                <Field name="text" />
-                                <ErrorMessage name="text" component="span" />
-                            </div>
-                            <button type="submit">Add Comment</button>
-                        </Form>
-                    </Formik>
-                </div>
-                <br />
+                {authState.status && (
+                    <div>
+                        <Formik initialValues={initialValues}
+                            validationSchema={validationSchema}
+                            onSubmit={onSubmit} >
+                            <Form>
+                                <div>
+                                    <Field name="text" />
+                                    <ErrorMessage name="text" component="span" />
+                                </div>
+                                <button type="submit">Add Comment</button>
+                            </Form>
+                        </Formik>
+                        <br />
+                    </div>
+                )}
+
                 <div>
                     {
                         commentList.map((comment, i) => {
                             return (
                                 <div key={comment.id}>
-                                    <div>{comment.text}</div>
-                                    <div>{comment.username}</div><br />
+                                    <div>{comment.username}</div>
+                                    <div>{comment.text}
+                                        {authState.username === comment.username && (
+                                            <button onClick={() => deleteComment(comment.id)}>Delete</button>
+                                        )}
+                                    </div>
+                                    <br />
                                 </div>
                             );
                         })

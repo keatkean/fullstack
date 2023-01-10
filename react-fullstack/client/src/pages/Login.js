@@ -1,4 +1,4 @@
-import React, { useContext} from 'react';
+import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
@@ -27,7 +27,7 @@ function Login() {
                 setAuthState({
                     username: localStorage.getItem("username"),
                     status: true
-                  });
+                });
                 navigate("/");
             })
             .catch(function (error) {
