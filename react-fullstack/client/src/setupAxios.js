@@ -27,6 +27,7 @@ function setupAxios() {
         // Do something with response error
         console.log(error.response);
         if (error.response.status === 401) {
+            sessionStorage.clear();
             window.location.replace("/login");
         }
         return Promise.reject(error);
