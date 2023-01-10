@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useContext} from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
+import { AuthContext } from '../helpers/AuthContext';
 
 function Login() {
+    const { setAuthState } = useContext(AuthContext);
     const navigate = useNavigate();
 
     const initialValues = {
@@ -21,6 +23,7 @@ function Login() {
         axios.post("/user/login", data)
             .then((res) => {
                 localStorage.setItem("accessToken", res.data.accessToken);
+                setAuthState(true);
                 navigate("/");
             })
             .catch(function (error) {
