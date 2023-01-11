@@ -22,8 +22,9 @@ function Home() {
                     return (
                         <div key={post.id} onClick={() => { navigate(`/post/${post.id}`) }}>
                             <div>{post.title}</div>
+                            <div>{post.username}</div>
                             <div>{post.description}</div>
-                            <div>{post.username}</div><br/>
+                            <br/>
                         </div>
                     );
                 })

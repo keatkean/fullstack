@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
@@ -8,6 +8,7 @@ import moment from 'moment';
 import UserContext from '../contexts/UserContext';
 
 function Post() {
+    const navigate = useNavigate();
     const { id } = useParams();
     const { user } = useContext(UserContext);
 
@@ -49,6 +50,17 @@ function Post() {
             });
     };
 
+    const deletePost = (id) => {
+        axios.delete(`/post/${id}`)
+            .then((res) => {
+                console.log(res.data);
+                navigate("/");
+            })
+            .catch(function (error) {
+                console.log(error.response);
+            });
+    }
+
     const deleteComment = (id) => {
         axios.delete(`/comment/${id}`)
             .then((res) => {
@@ -66,9 +78,13 @@ function Post() {
         <div>
             <div>
                 <div>{post.title}</div>
-                <div>{post.description}</div>
                 <div>{post.username}</div>
-                <div>{moment(post.updatedAt).format(process.env.REACT_APP_DATETIME_FORMAT)}</div><br />
+                <div>{post.description}</div>
+                <div>{moment(post.updatedAt).format(process.env.REACT_APP_DATETIME_FORMAT)}
+                    {user && user.username === post.username && (
+                        <button onClick={() => deletePost(post.id)}>Delete</button>
+                    )}</div>
+                <br />
             </div>
 
             <div>
