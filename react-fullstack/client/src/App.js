@@ -7,17 +7,18 @@ import Register from './pages/Register';
 import Login from './pages/Login';
 import { useState, useEffect } from 'react';
 import UserContext from './contexts/UserContext';
+import axios from 'axios';
 
 function App() {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    // if (localStorage.getItem("accessToken")) {
-    //   setAuthState({
-    //     username: localStorage.getItem("username"),
-    //     status: true
-    //   });
-    // }
+    if (localStorage.getItem("accessToken")) {
+      axios.get('/user/auth').then((res) => {
+        //console.log(res.data);
+        setUser(res.data);
+      });
+    }
   }, []);
 
   const logout = () => {
@@ -47,8 +48,12 @@ function App() {
             <Route path="/" exact element={<Home />} />
             <Route path="/register" exact element={<Register />} />
             <Route path="/login" exact element={<Login />} />
-            <Route path="/createPost" exact element={<CreatePost />} />
             <Route path="/post/:id" exact element={<Post />} />
+            {user && (
+              <>
+                <Route path="/createPost" exact element={<CreatePost />} />
+              </>
+            )}
           </Routes>
         </Router>
       </UserContext.Provider>
