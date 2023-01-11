@@ -3,6 +3,7 @@ const router = express.Router();
 const bcrypt = require('bcrypt');
 const { sign } = require('jsonwebtoken');
 const { User } = require('../models');
+const { validateToken } = require('../middlewares/auth');
 require('dotenv').config();
 
 router.post("/register", async (req, res) => {
@@ -49,6 +50,12 @@ router.post("/login", async (req, res) => {
     res.json({
         username: user.username,
         accessToken: accessToken
+    });
+});
+
+router.get("/auth", validateToken, (req, res) => {
+    res.json({
+        username: req.user.username
     });
 });
 
