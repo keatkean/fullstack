@@ -50,7 +50,7 @@ function Post() {
     };
 
     const deleteComment = (id) => {
-        axios.post("/comment/delete", { id: id })
+        axios.delete(`/comment/${id}`)
             .then((res) => {
                 console.log(res.data);
                 setCommentList(commentList.filter((val) => {

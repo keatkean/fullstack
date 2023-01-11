@@ -20,8 +20,8 @@ router.post("/create", validateToken, async (req, res) => {
     res.json(result);
 });
 
-router.post("/delete", validateToken, async (req, res) => {
-    let id = req.body.id;
+router.delete("/:id", validateToken, async (req, res) => {
+    let id = req.params.id;
     let comment = await Comment.findByPk(id);
     if (!comment) {
         res.status(400).json({
