@@ -24,4 +24,26 @@ router.post("/create", validateToken, async (req, res) => {
     res.json(result);
 });
 
+router.delete("/:id", validateToken, async (req, res) => {
+    let id = req.params.id;
+    let post = await Post.findByPk(id);
+    if (!post) {
+        res.status(400).json({
+            message: "Post is not found."
+        });
+        return;
+    }
+    
+    if (post.userId != req.user.id) {
+        res.sendStatus(403);
+        return;
+    }
+
+    let result = await Post.destroy({
+        where: { id: id }
+    })
+    console.log(`${result} post deleted`);
+    res.sendStatus(200);
+})
+
 module.exports = router;
