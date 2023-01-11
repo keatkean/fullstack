@@ -5,44 +5,39 @@ import CreatePost from './pages/CreatePost';
 import Post from './pages/Post';
 import Register from './pages/Register';
 import Login from './pages/Login';
-import { AuthContext } from './helpers/AuthContext';
 import { useState, useEffect } from 'react';
+import UserContext from './contexts/UserContext';
 
 function App() {
-  const [authState, setAuthState] = useState({
-    username: "",
-    status: false
-  });
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
-    if (localStorage.getItem("accessToken")) {
-      setAuthState({
-        username: localStorage.getItem("username"),
-        status: true
-      });
-    }
+    // if (localStorage.getItem("accessToken")) {
+    //   setAuthState({
+    //     username: localStorage.getItem("username"),
+    //     status: true
+    //   });
+    // }
   }, []);
 
   const logout = () => {
     localStorage.clear();
-    setAuthState({
-      username: "",
-      status: false
-    });
+    setUser(null);
   };
 
   return (
     <div className="App">
-      <AuthContext.Provider value={{ authState, setAuthState }}>
+      <UserContext.Provider value={{ user, setUser }}>
         <Router>
           <Link to="/">Home</Link>
-          {authState.status ? (
+          {user && (
             <>
               <Link to="/createPost">Create Post</Link>
-              <label>{authState.username}</label>
+              <label>{user.username}</label>
               <button onClick={logout}>Logout</button>
             </>
-          ) : (
+          )}
+          {!user && (
             <>
               <Link to="register">Register</Link>
               <Link to="login">Login</Link>
@@ -56,7 +51,7 @@ function App() {
             <Route path="/post/:id" exact element={<Post />} />
           </Routes>
         </Router>
-      </AuthContext.Provider>
+      </UserContext.Provider>
     </div>
   );
 }

@@ -5,11 +5,11 @@ import axios from 'axios';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import moment from 'moment';
-import { AuthContext } from '../helpers/AuthContext';
+import UserContext from '../contexts/UserContext';
 
 function Post() {
     const { id } = useParams();
-    const { authState } = useContext(AuthContext);
+    const { user } = useContext(UserContext);
 
     const [post, setPost] = useState({});
     const [commentList, setCommentList] = useState([]);
@@ -72,7 +72,7 @@ function Post() {
             </div>
 
             <div>
-                {authState.status && (
+                {user && (
                     <div>
                         <Formik initialValues={initialValues}
                             validationSchema={validationSchema}
@@ -96,7 +96,7 @@ function Post() {
                                 <div key={comment.id}>
                                     <div>{comment.username}</div>
                                     <div>{comment.text}
-                                        {authState.username === comment.username && (
+                                        {user && user.username === comment.username && (
                                             <button onClick={() => deleteComment(comment.id)}>Delete</button>
                                         )}
                                     </div>
