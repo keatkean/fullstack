@@ -8,7 +8,7 @@ router.post("/", async (req, res) => {
     // Validate request
     if (!tutorial.title) {
         res.status(400).json({
-            message: "Content can not be empty."
+            message: "Content cannot be empty."
         });
         return;
     }
