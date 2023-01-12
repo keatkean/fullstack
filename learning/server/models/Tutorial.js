@@ -1,12 +1,13 @@
 module.exports = (sequelize, DataTypes) => {
     const Tutorial = sequelize.define("Tutorial", {
         title: {
-            type: DataTypes.STRING,
-            allowNull: false
+            type: DataTypes.STRING
         },
         description: {
-            type: DataTypes.STRING,
-            allowNull: false
+            type: DataTypes.STRING
+        },
+        published: {
+            type: DataTypes.BOOLEAN
         }
     });
     return Tutorial;
