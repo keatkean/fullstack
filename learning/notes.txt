@@ -6,3 +6,4 @@ npm i sequelize mysql2
 
 client:
 npx create-react-app .
+npm i @mui/material @emotion/react @emotion/styled
