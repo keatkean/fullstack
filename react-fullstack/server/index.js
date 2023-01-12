@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const app = express();
 app.use(express.json());
@@ -15,7 +16,8 @@ app.use("/comment", commentRouter);
 
 const db = require('./models');
 db.sequelize.sync({ alter: true }).then(() => {
-    app.listen(3001, () => {
-        console.log("⚡ Sever running on http://localhost:3001");
+    let port = process.env.APP_PORT;
+    app.listen(port, () => {
+        console.log(`⚡ Sever running on http://localhost:${port}`);
     })
 });
