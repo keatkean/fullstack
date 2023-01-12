@@ -3,3 +3,6 @@ npm init -y
 npm i express cors dotenv
 npm i nodemon --save-dev
 npm i sequelize mysql2
+
+client:
+npx create-react-app .
