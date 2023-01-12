@@ -1,8 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const db = require('../models');
-const Tutorial = db.Tutorial;
-const Op = db.Sequelize.Op;
+const { Tutorial, Sequelize } = require('../models');
 
 router.post("/", async (req, res) => {
     let tutorial = req.body;
@@ -12,13 +10,19 @@ router.post("/", async (req, res) => {
 
 router.get("/", async (req, res) => {
     let title = req.query.title;
-    let condition = title ? { title: { [Op.like]: `%${title}%` } } : null;
+    let condition = title ? { title: { [Sequelize.Op.like]: `%${title}%` } } : null;
     
     let list = await Tutorial.findAll({
         where: condition,
         order: [['createdAt', 'DESC']]
     });
     res.json(list);
+});
+
+router.get("/:id", async (req, res) => {
+    let id = req.params.id;
+    let tutorial = await Tutorial.findByPk(id);
+    res.json(tutorial);
 });
 
 module.exports = router;
