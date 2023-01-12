@@ -4,8 +4,6 @@ const { Tutorial, Sequelize } = require('../models');
 
 router.post("/", async (req, res) => {
     let tutorial = req.body;
-
-    // Validate request
     if (!tutorial.title) {
         res.status(400).json({
             message: "Content cannot be empty."
@@ -48,9 +46,26 @@ router.put("/:id", async (req, res) => {
     }
     else {
         res.status(400).json({
-            message: `Cannot update tutorial with id=${id}.`
+            message: `Cannot update tutorial with id ${id}.`
         });
     }
 });
+
+router.delete("/:id", async (req, res) => {
+    let id = req.params.id;
+    let num = await Tutorial.destroy({
+        where: { id: id }
+    })
+    if (num == 1) {
+        res.json({
+            message: "Tutorial was deleted successfully."
+        });
+    }
+    else {
+        res.status(400).json({
+            message: `Cannot delete tutorial with id ${id}.`
+        });
+    }
+})
 
 module.exports = router;
