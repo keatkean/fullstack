@@ -28,6 +28,10 @@ https://github.com/bezkoder/react-crud-web-api
 Node.js Rest APIs with Express, Sequelize & MySQL example
 https://github.com/bezkoder/nodejs-express-sequelize-mysql
 
+https://www.bezkoder.com/react-material-ui-examples-crud/
+https://github.com/bezkoder/react-material-ui-examples
+https://github.com/bezkoder/nodejs-express-sequelize-mysql
+
 Sequelize
 https://sequelize.org/docs/v6/core-concepts/model-basics/
 React Forms
