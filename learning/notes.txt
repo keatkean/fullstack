@@ -7,4 +7,5 @@ npm i sequelize mysql2
 client:
 npx create-react-app .
 npm i @mui/material @emotion/react @emotion/styled
+npm i @mui/icons-material
 npm i react-router-dom
