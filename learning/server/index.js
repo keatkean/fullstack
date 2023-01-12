@@ -6,7 +6,10 @@ app.use(express.json());
 const cors = require('cors');
 app.use(cors());
 
-let port = process.env.APP_PORT;
-app.listen(port, () => {
-    console.log(`⚡ Sever running on http://localhost:${port}`);
+const db = require('./models');
+db.sequelize.sync({ alter: true }).then(() => {
+    let port = process.env.APP_PORT;
+    app.listen(port, () => {
+        console.log(`⚡ Sever running on http://localhost:${port}`);
+    })
 });
