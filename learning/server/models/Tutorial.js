@@ -7,10 +7,6 @@ module.exports = (sequelize, DataTypes) => {
         description: {
             type: DataTypes.STRING,
             allowNull: false
-        },
-        published: {
-            type: DataTypes.BOOLEAN,
-            allowNull: false
         }
     });
     return Tutorial;

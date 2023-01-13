@@ -25,14 +25,6 @@ router.get("/", async (req, res) => {
     res.json(list);
 });
 
-router.get("/published", async (req, res) => {
-    let list = await Tutorial.findAll({
-        where: { published: true },
-        order: [['createdAt', 'DESC']]
-    });
-    res.json(list);
-});
-
 router.get("/:id", async (req, res) => {
     let id = req.params.id;
     let tutorial = await Tutorial.findByPk(id);
