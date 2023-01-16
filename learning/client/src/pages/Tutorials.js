@@ -1,8 +1,9 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { Container, Typography, Button, Grid, Card, CardContent, Box, IconButton } from '@mui/material';
-import { Edit } from '@mui/icons-material';
+import { AccessTime, Edit } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
+import moment from 'moment';
 import http from '../http';
 
 function Tutorials() {
@@ -35,7 +36,7 @@ function Tutorials() {
                             <Grid item xs={12} md={6} lg={4} key={tutorial.id}>
                                 <Card >
                                     <CardContent>
-                                        <Box sx={{ display: 'flex' }}>
+                                        <Box sx={{ display: 'flex', mb: 1 }}>
                                             <Typography variant="h5"
                                                 sx={{ flexGrow: 1 }}>
                                                 {tutorial.title}
@@ -45,7 +46,13 @@ function Tutorials() {
                                                 <Edit />
                                             </IconButton>
                                         </Box>
-                                        <Typography variant="body2" color="text.secondary">
+                                        <Box color="text.secondary" sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
+                                            <AccessTime sx={{ mr: 1 }} />
+                                            <Typography>
+                                                {moment(tutorial.createdAt).format(process.env.REACT_APP_DATETIME_FORMAT)}
+                                            </Typography>
+                                        </Box>
+                                        <Typography>
                                             {tutorial.description}
                                         </Typography>
                                     </CardContent>
