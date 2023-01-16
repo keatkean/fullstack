@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { Container, Typography, TextField, Button } from '@mui/material';
+import { Container, Box, Typography, TextField, Button } from '@mui/material';
 import { Snackbar, Alert } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
@@ -54,33 +54,41 @@ function Login() {
 
     return (
         <Container>
-            <Typography variant="h5" sx={{ my: 2 }}>
-                Login
-            </Typography>
-            <form onSubmit={formik.handleSubmit}>
-                <TextField
-                    fullWidth sx={{ mb: 2 }}
-                    name="email"
-                    label="Email"
-                    value={formik.values.email}
-                    onChange={formik.handleChange}
-                    error={formik.touched.email && Boolean(formik.errors.email)}
-                    helperText={formik.touched.email && formik.errors.email}
-                />
-                <TextField
-                    fullWidth sx={{ mb: 2 }}
-                    name="password"
-                    type="password"
-                    label="Password"
-                    value={formik.values.password}
-                    onChange={formik.handleChange}
-                    error={formik.touched.password && Boolean(formik.errors.password)}
-                    helperText={formik.touched.password && formik.errors.password}
-                />
-                <Button variant="contained" type="submit">
+            <Box sx={{
+                marginTop: 8,
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center'
+            }}
+            >
+                <Typography variant="h5" sx={{ my: 2 }}>
                     Login
-                </Button>
-            </form>
+                </Typography>
+                <Box component="form" onSubmit={formik.handleSubmit}>
+                    <TextField
+                        fullWidth margin="normal" autoFocus
+                        name="email"
+                        label="Email"
+                        value={formik.values.email}
+                        onChange={formik.handleChange}
+                        error={formik.touched.email && Boolean(formik.errors.email)}
+                        helperText={formik.touched.email && formik.errors.email}
+                    />
+                    <TextField
+                        fullWidth margin="normal"
+                        name="password"
+                        type="password"
+                        label="Password"
+                        value={formik.values.password}
+                        onChange={formik.handleChange}
+                        error={formik.touched.password && Boolean(formik.errors.password)}
+                        helperText={formik.touched.password && formik.errors.password}
+                    />
+                    <Button fullWidth variant="contained" sx={{ mt: 2 }} type="submit">
+                        Login
+                    </Button>
+                </Box>
+            </Box>
 
             <Snackbar
                 open={open}

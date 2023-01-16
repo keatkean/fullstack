@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Container, Typography, TextField, Button } from '@mui/material';
+import { Container, Box, Typography, TextField, Button } from '@mui/material';
 import { Snackbar, Alert } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
@@ -55,42 +55,50 @@ function Register() {
 
     return (
         <Container>
-            <Typography variant="h5" sx={{ my: 2 }}>
-                Register
-            </Typography>
-            <form onSubmit={formik.handleSubmit}>
-                <TextField
-                    fullWidth sx={{ mb: 2 }}
-                    name="email"
-                    label="Email"
-                    value={formik.values.email}
-                    onChange={formik.handleChange}
-                    error={formik.touched.email && Boolean(formik.errors.email)}
-                    helperText={formik.touched.email && formik.errors.email}
-                />
-                <TextField
-                    fullWidth sx={{ mb: 2 }}
-                    name="password"
-                    type="password"
-                    label="Password"
-                    value={formik.values.password}
-                    onChange={formik.handleChange}
-                    error={formik.touched.password && Boolean(formik.errors.password)}
-                    helperText={formik.touched.password && formik.errors.password}
-                />
-                <TextField
-                    fullWidth sx={{ mb: 2 }}
-                    name="username"
-                    label="Name"
-                    value={formik.values.username}
-                    onChange={formik.handleChange}
-                    error={formik.touched.username && Boolean(formik.errors.username)}
-                    helperText={formik.touched.username && formik.errors.username}
-                />
-                <Button variant="contained" type="submit">
+            <Box sx={{
+                marginTop: 8,
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center'
+            }}
+            >
+                <Typography variant="h5" sx={{ my: 2 }}>
                     Register
-                </Button>
-            </form>
+                </Typography>
+                <Box component="form" onSubmit={formik.handleSubmit}>
+                    <TextField
+                        fullWidth margin="normal" autoFocus
+                        name="email"
+                        label="Email"
+                        value={formik.values.email}
+                        onChange={formik.handleChange}
+                        error={formik.touched.email && Boolean(formik.errors.email)}
+                        helperText={formik.touched.email && formik.errors.email}
+                    />
+                    <TextField
+                        fullWidth margin="normal"
+                        name="password"
+                        type="password"
+                        label="Password"
+                        value={formik.values.password}
+                        onChange={formik.handleChange}
+                        error={formik.touched.password && Boolean(formik.errors.password)}
+                        helperText={formik.touched.password && formik.errors.password}
+                    />
+                    <TextField
+                        fullWidth margin="normal"
+                        name="username"
+                        label="Name"
+                        value={formik.values.username}
+                        onChange={formik.handleChange}
+                        error={formik.touched.username && Boolean(formik.errors.username)}
+                        helperText={formik.touched.username && formik.errors.username}
+                    />
+                    <Button fullWidth variant="contained" sx={{ mt: 2 }} type="submit">
+                        Register
+                    </Button>
+                </Box>
+            </Box>
 
             <Snackbar
                 open={open}
