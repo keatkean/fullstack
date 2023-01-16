@@ -65,7 +65,8 @@ function Register() {
                 <Typography variant="h5" sx={{ my: 2 }}>
                     Register
                 </Typography>
-                <Box component="form" onSubmit={formik.handleSubmit}>
+                <Box component="form" onSubmit={formik.handleSubmit}
+                    sx={{ maxWidth: '500px' }}>
                     <TextField
                         fullWidth margin="normal" autoComplete='off'
                         name="email"
