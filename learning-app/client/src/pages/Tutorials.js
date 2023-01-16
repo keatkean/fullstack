@@ -1,13 +1,15 @@
-import React from 'react';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Container, Typography, Button, Grid, Card, CardContent, Box, IconButton, Input } from '@mui/material';
 import { AccessTime, AccountCircle, Edit, Search, Clear } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import moment from 'moment';
 import http from '../http';
+import UserContext from '../contexts/UserContext';
 
 function Tutorials() {
     const navigate = useNavigate();
+    const { user } = useContext(UserContext);
+
     const [tutorialList, setTutorialList] = useState([]);
     const [search, setSearch] = useState('');
 
@@ -61,10 +63,14 @@ function Tutorials() {
                     <Clear />
                 </IconButton>
                 <Box sx={{ flexGrow: 1 }} />
-                <Button variant='contained'
-                    onClick={() => { navigate('/addtutorial') }}>
-                    Add
-                </Button>
+                {
+                    user && (
+                        <Button variant='contained'
+                            onClick={() => { navigate('/addtutorial') }}>
+                            Add
+                        </Button>
+                    )
+                }
             </Box>
 
             <Grid container spacing={2}>
@@ -79,10 +85,14 @@ function Tutorials() {
                                                 sx={{ flexGrow: 1 }}>
                                                 {tutorial.title}
                                             </Typography>
-                                            <IconButton color="primary"
-                                                onClick={() => { navigate(`/edittutorial/${tutorial.id}`) }} >
-                                                <Edit />
-                                            </IconButton>
+                                            {
+                                                user && user.id === tutorial.userId && (
+                                                    <IconButton color="primary" sx={{ padding: '4px' }}
+                                                        onClick={() => { navigate(`/edittutorial/${tutorial.id}`) }} >
+                                                        <Edit />
+                                                    </IconButton>
+                                                )
+                                            }
                                         </Box>
                                         <Box color="text.secondary" >
                                             <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
