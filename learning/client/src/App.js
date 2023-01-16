@@ -3,6 +3,7 @@ import { Container, AppBar, Toolbar, Typography, Box, Button } from '@mui/materi
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Tutorials from './pages/Tutorials';
 import AddTutorial from './pages/AddTutorial';
+import EditTutorial from './pages/EditTutorial';
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
           <Route path={"/"} element={<Tutorials />} />
           <Route path={"/tutorials"} element={<Tutorials />} />
           <Route path={"/addtutorial"} element={<AddTutorial />} />
+          <Route path={"/edittutorial/:id"} element={<EditTutorial />} />
         </Routes>
       </Router>
     </div>
