@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Typography, TextField, Button } from '@mui/material';
+import { Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@mui/material';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
@@ -8,6 +9,7 @@ import http from '../http';
 function EditTutorial() {
     const navigate = useNavigate();
     const { id } = useParams();
+
     const [tutorial, setTutorial] = useState({
         title: "",
         description: ""
@@ -44,6 +46,28 @@ function EditTutorial() {
         }
     });
 
+    const [open, setOpen] = React.useState(false);
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
+    const deleteTutorial = () => {
+        setOpen(false);
+        http.delete(`/tutorial/${id}`)
+            .then((res) => {
+                console.log(res.data);
+                navigate("/tutorials");
+            })
+            .catch(function (error) {
+                console.log(error.response);
+            });
+    }
+
     return (
         <Container>
             <Typography variant="h5" sx={{ my: 2 }}>
@@ -70,9 +94,31 @@ function EditTutorial() {
                     helperText={formik.touched.description && formik.errors.description}
                 />
                 <Button variant="contained" type="submit">
-                    Submit
+                    Update
+                </Button>
+                <Button variant="contained" sx={{ ml: 2 }} color="error" onClick={handleClickOpen}>
+                    Delete
                 </Button>
             </form>
+
+            <Dialog open={open} onClose={handleClose}>
+                <DialogTitle>
+                    Delete Tutorial
+                </DialogTitle>
+                <DialogContent>
+                    <DialogContentText>
+                        Are you sure you want to delete this tutorial?
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleClose} variant="contained" color="inherit">
+                        Cancel
+                    </Button>
+                    <Button onClick={deleteTutorial} variant="contained" color="error">
+                        Delete
+                    </Button>
+                </DialogActions>
+            </Dialog>
         </Container>
     )
 }
