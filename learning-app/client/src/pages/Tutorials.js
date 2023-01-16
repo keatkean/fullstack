@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { Container, Typography, Button, Grid, Card, CardContent, Box, IconButton, Input } from '@mui/material';
-import { AccessTime, Edit, Search, Clear } from '@mui/icons-material';
+import { AccessTime, AccountCircle, Edit, Search, Clear } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import moment from 'moment';
 import http from '../http';
@@ -84,11 +84,19 @@ function Tutorials() {
                                                 <Edit />
                                             </IconButton>
                                         </Box>
-                                        <Box color="text.secondary" sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
-                                            <AccessTime sx={{ mr: 1 }} />
-                                            <Typography>
-                                                {moment(tutorial.createdAt).format(process.env.REACT_APP_DATETIME_FORMAT)}
-                                            </Typography>
+                                        <Box color="text.secondary" >
+                                            <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
+                                                <AccountCircle sx={{ mr: 1 }} />
+                                                <Typography>
+                                                    {tutorial.user.name}
+                                                </Typography>
+                                            </Box>
+                                            <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
+                                                <AccessTime sx={{ mr: 1 }} />
+                                                <Typography>
+                                                    {moment(tutorial.createdAt).format(process.env.REACT_APP_DATETIME_FORMAT)}
+                                                </Typography>
+                                            </Box>
                                         </Box>
                                         <Typography>
                                             {tutorial.description}
