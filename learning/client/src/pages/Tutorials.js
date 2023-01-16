@@ -35,7 +35,7 @@ function Tutorials() {
     };
 
     const onSearchKeyDown = (e) => {
-        if (e.keyCode == 13) {
+        if (e.keyCode === 13) {
             searchTutorials();
         }
     };
@@ -57,7 +57,7 @@ function Tutorials() {
                 <IconButton onClick={searchTutorials} color="primary">
                     <Search />
                 </IconButton>
-                <IconButton onClick={onClearSearch}  >
+                <IconButton onClick={onClearSearch} color="primary">
                     <Clear />
                 </IconButton>
                 <Box sx={{ flexGrow: 1 }} />
