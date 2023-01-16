@@ -1,37 +1,75 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { Container, Typography, Button, Grid, Card, CardContent, Box, IconButton } from '@mui/material';
-import { AccessTime, Edit } from '@mui/icons-material';
+import { Container, Typography, Button, Grid, Card, CardContent, Box, IconButton, Input } from '@mui/material';
+import { AccessTime, Edit, Search, Clear } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import moment from 'moment';
 import http from '../http';
 
 function Tutorials() {
-    const [tutorialList, setTutorialList] = useState([]);
     const navigate = useNavigate();
+    const [tutorialList, setTutorialList] = useState([]);
+    const [search, setSearch] = useState('');
 
-    useEffect(() => {
-        http.get("/tutorial/").then((res) => {
-            //console.log(res.data);
+    const getTutorials = () => {
+        http.get('/tutorial').then((res) => {
+            console.log(res.data);
             setTutorialList(res.data);
         });
+    };
+
+    const searchTutorials = () => {
+        http.get(`/tutorial?search=${search}`).then((res) => {
+            console.log(res.data);
+            setTutorialList(res.data);
+        });
+    };
+
+    useEffect(() => {
+        getTutorials();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
+
+    const onSearchChange = (e) => {
+        setSearch(e.target.value);
+    };
+
+    const onSearchKeyDown = (e) => {
+        if (e.keyCode == 13) {
+            searchTutorials();
+        }
+    };
+
+    const onClearSearch = () => {
+        setSearch('');
+        getTutorials();
+    };
 
     return (
         <Container>
-            <Box sx={{ display: 'flex', my: 2 }}>
-                <Typography variant="h5" sx={{ flexGrow: 1 }}>
-                    Tutorials
-                </Typography>
+            <Typography variant="h5" sx={{ my: 2 }}>
+                Tutorials
+            </Typography>
+
+            <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
+                <Input value={search} placeholder="Search by title"
+                    onChange={onSearchChange} onKeyDown={onSearchKeyDown} />
+                <IconButton onClick={searchTutorials} color="primary">
+                    <Search />
+                </IconButton>
+                <IconButton onClick={onClearSearch}  >
+                    <Clear />
+                </IconButton>
+                <Box sx={{ flexGrow: 1 }} />
                 <Button variant='contained'
                     onClick={() => { navigate('/addtutorial') }}>
-                    Add Tutorial
+                    Add
                 </Button>
             </Box>
 
             <Grid container spacing={2}>
                 {
-                    tutorialList.map((tutorial, i) => {
+                    tutorialList && tutorialList.map((tutorial, i) => {
                         return (
                             <Grid item xs={12} md={6} lg={4} key={tutorial.id}>
                                 <Card >

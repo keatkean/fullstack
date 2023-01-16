@@ -15,8 +15,8 @@ router.post("/", async (req, res) => {
 });
 
 router.get("/", async (req, res) => {
-    let title = req.query.title;
-    let condition = title ? { title: { [Sequelize.Op.like]: `%${title}%` } } : null;
+    let search = req.query.search;
+    let condition = search ? { title: { [Sequelize.Op.like]: `%${search}%` } } : null;
 
     let list = await Tutorial.findAll({
         where: condition,
