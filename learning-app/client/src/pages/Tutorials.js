@@ -81,7 +81,7 @@ function Tutorials() {
                                 <Card >
                                     <CardContent>
                                         <Box sx={{ display: 'flex', mb: 1 }}>
-                                            <Typography variant="h5"
+                                            <Typography variant="h6"
                                                 sx={{ flexGrow: 1 }}>
                                                 {tutorial.title}
                                             </Typography>
