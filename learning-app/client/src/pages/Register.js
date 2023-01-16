@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Container, Typography, TextField, Button } from '@mui/material';
+import { Snackbar, Alert } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
@@ -7,6 +8,16 @@ import http from '../http';
 
 function Register() {
     const navigate = useNavigate();
+
+    const [message, setMessage] = useState('');
+    const [open, setOpen] = useState(false);
+
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        setOpen(false);
+    };
 
     const formik = useFormik({
         initialValues: {
@@ -36,6 +47,8 @@ function Register() {
                 })
                 .catch(function (error) {
                     console.log(error.response);
+                    setMessage(error.response.data.message);
+                    setOpen(true);
                 });
         }
     });
@@ -78,6 +91,17 @@ function Register() {
                     Register
                 </Button>
             </form>
+
+            <Snackbar
+                open={open}
+                autoHideDuration={5000}
+                onClose={handleClose}
+                anchorOrigin={{ vertical: "top", horizontal: "right" }}
+            >
+                <Alert onClose={handleClose} variant='filled' severity="error" sx={{ width: '100%' }}>
+                    {message}
+                </Alert>
+            </Snackbar>
         </Container>
     )
 }
