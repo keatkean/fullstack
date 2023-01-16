@@ -1,5 +1,5 @@
 import './App.css';
-import { Box, Container, AppBar, Toolbar, Typography, Button } from '@mui/material';
+import { Container, AppBar, Toolbar, Typography, Box, Button } from '@mui/material';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Tutorials from './pages/Tutorials';
 
@@ -9,7 +9,7 @@ function App() {
       <Router>
         <AppBar position="static" className='AppBar'>
           <Container>
-            <Toolbar>
+            <Toolbar disableGutters={true}>
               <Link to="/">
                 <Typography variant="h6">
                   Learning
