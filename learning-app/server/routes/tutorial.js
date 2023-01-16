@@ -37,6 +37,7 @@ router.get("/:id", async (req, res) => {
         res.sendStatus(404);
         return;
     }
+    //console.log(tutorial.toJSON());
     res.json(tutorial);
 });
 
