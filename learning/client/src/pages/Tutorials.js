@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { Container, Typography, Grid, Card, CardContent, Box, IconButton } from '@mui/material';
+import { Container, Typography, Button, Grid, Card, CardContent, Box, IconButton } from '@mui/material';
 import { Edit } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import http from '../http';
@@ -18,9 +18,16 @@ function Tutorials() {
 
     return (
         <Container>
-            <Typography variant="h5" component="div" sx={{ my: 2 }}>
-                Tutorials
-            </Typography>
+            <Box sx={{ display: 'flex', my: 2 }}>
+                <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
+                    Tutorials
+                </Typography>
+                <Button variant='contained'
+                    onClick={() => { navigate('/addtutorial') }}>
+                    Add Tutorial
+                </Button>
+            </Box>
+
             <Grid container spacing={2}>
                 {
                     tutorialList.map((tutorial, i) => {
