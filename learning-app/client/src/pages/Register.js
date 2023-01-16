@@ -68,7 +68,7 @@ function Register() {
                 <Box component="form" onSubmit={formik.handleSubmit}
                     sx={{ maxWidth: '500px' }}>
                     <TextField
-                        fullWidth margin="normal" autoComplete='off'
+                        fullWidth margin="normal" autoComplete="off"
                         name="email"
                         label="Email"
                         value={formik.values.email}
@@ -77,7 +77,7 @@ function Register() {
                         helperText={formik.touched.email && formik.errors.email}
                     />
                     <TextField
-                        fullWidth margin="normal" autoComplete='off'
+                        fullWidth margin="normal" autoComplete="off"
                         name="password"
                         type="password"
                         label="Password"
@@ -87,7 +87,7 @@ function Register() {
                         helperText={formik.touched.password && formik.errors.password}
                     />
                     <TextField
-                        fullWidth margin="normal" autoComplete='off'
+                        fullWidth margin="normal" autoComplete="off"
                         name="username"
                         label="Name"
                         value={formik.values.username}

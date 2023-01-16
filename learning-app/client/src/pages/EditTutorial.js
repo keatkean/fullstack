@@ -75,7 +75,7 @@ function EditTutorial() {
             </Typography>
             <Box component="form" onSubmit={formik.handleSubmit}>
                 <TextField
-                    fullWidth margin="normal" autoComplete='off'
+                    fullWidth margin="normal" autoComplete="off"
                     name="title"
                     label="Title"
                     value={formik.values.title}
@@ -84,7 +84,7 @@ function EditTutorial() {
                     helperText={formik.touched.title && formik.errors.title}
                 />
                 <TextField
-                    fullWidth margin="normal" autoComplete='off'
+                    fullWidth margin="normal" autoComplete="off"
                     multiline minRows={2}
                     name="description"
                     label="Description"
