@@ -19,7 +19,7 @@ function Tutorials() {
     return (
         <Container>
             <Box sx={{ display: 'flex', my: 2 }}>
-                <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
+                <Typography variant="h5" sx={{ flexGrow: 1 }}>
                     Tutorials
                 </Typography>
                 <Button variant='contained'
@@ -36,7 +36,7 @@ function Tutorials() {
                                 <Card >
                                     <CardContent>
                                         <Box sx={{ display: 'flex' }}>
-                                            <Typography gutterBottom variant="h5" component="div"
+                                            <Typography variant="h5"
                                                 sx={{ flexGrow: 1 }}>
                                                 {tutorial.title}
                                             </Typography>
