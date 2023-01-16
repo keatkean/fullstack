@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Typography, TextField, Button } from '@mui/material';
+import { Container, Box, Typography, TextField, Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
@@ -38,9 +38,9 @@ function AddTutorial() {
             <Typography variant="h5" sx={{ my: 2 }}>
                 Add Tutorial
             </Typography>
-            <form onSubmit={formik.handleSubmit}>
+            <Box component="form" onSubmit={formik.handleSubmit}>
                 <TextField
-                    fullWidth sx={{ mb: 2 }}
+                    fullWidth margin="normal" autoComplete='off'
                     name="title"
                     label="Title"
                     value={formik.values.title}
@@ -49,7 +49,7 @@ function AddTutorial() {
                     helperText={formik.touched.title && formik.errors.title}
                 />
                 <TextField
-                    fullWidth sx={{ mb: 2 }}
+                    fullWidth margin="normal" autoComplete='off'
                     multiline minRows={2}
                     name="description"
                     label="Description"
@@ -58,10 +58,12 @@ function AddTutorial() {
                     error={formik.touched.description && Boolean(formik.errors.description)}
                     helperText={formik.touched.description && formik.errors.description}
                 />
-                <Button variant="contained" type="submit">
-                    Add
-                </Button>
-            </form>
+                <Box sx={{ mt: 2 }}>
+                    <Button variant="contained" type="submit">
+                        Add
+                    </Button>
+                </Box>
+            </Box>
         </Container>
     )
 }

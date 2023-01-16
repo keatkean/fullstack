@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Typography, TextField, Button } from '@mui/material';
+import { Container, Box, Typography, TextField, Button } from '@mui/material';
 import { Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@mui/material';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
@@ -73,9 +73,9 @@ function EditTutorial() {
             <Typography variant="h5" sx={{ my: 2 }}>
                 Edit Tutorial
             </Typography>
-            <form onSubmit={formik.handleSubmit}>
+            <Box component="form" onSubmit={formik.handleSubmit}>
                 <TextField
-                    fullWidth sx={{ mb: 2 }}
+                    fullWidth margin="normal" autoComplete='off'
                     name="title"
                     label="Title"
                     value={formik.values.title}
@@ -84,7 +84,7 @@ function EditTutorial() {
                     helperText={formik.touched.title && formik.errors.title}
                 />
                 <TextField
-                    fullWidth sx={{ mb: 2 }}
+                    fullWidth margin="normal" autoComplete='off'
                     multiline minRows={2}
                     name="description"
                     label="Description"
@@ -93,13 +93,15 @@ function EditTutorial() {
                     error={formik.touched.description && Boolean(formik.errors.description)}
                     helperText={formik.touched.description && formik.errors.description}
                 />
-                <Button variant="contained" type="submit">
-                    Update
-                </Button>
-                <Button variant="contained" sx={{ ml: 2 }} color="error" onClick={handleClickOpen}>
-                    Delete
-                </Button>
-            </form>
+                <Box sx={{ mt: 2 }}>
+                    <Button variant="contained" type="submit">
+                        Update
+                    </Button>
+                    <Button variant="contained" sx={{ ml: 2 }} color="error" onClick={handleClickOpen}>
+                        Delete
+                    </Button>
+                </Box>
+            </Box>
 
             <Dialog open={open} onClose={handleClose}>
                 <DialogTitle>
