@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Container, Typography, TextField, Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import http from '../http';
+import UserContext from '../contexts/UserContext';
 
 function Login() {
     const navigate = useNavigate();
+    const { setUser } = useContext(UserContext);
 
     const formik = useFormik({
         initialValues: {
@@ -27,6 +29,8 @@ function Login() {
             http.post("/user/login", data)
                 .then((res) => {
                     console.log(res.data);
+                    localStorage.setItem("accessToken", res.data.accessToken);
+                    setUser(res.data.user);
                     navigate("/");
                 })
                 .catch(function (error) {
