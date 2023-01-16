@@ -8,7 +8,7 @@ require('dotenv').config();
 
 router.post("/register", async (req, res) => {
     try {
-        let { email, password, name } = req.body;
+        let { email, password, username } = req.body;
         let user = await User.findOne({
             where: { email: email }
         });
@@ -21,7 +21,7 @@ router.post("/register", async (req, res) => {
         let result = await User.create({
             email: email,
             password: hash,
-            name: name
+            name: username
         });
         res.json(result);
     }

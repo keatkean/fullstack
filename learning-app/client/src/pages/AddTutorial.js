@@ -59,7 +59,7 @@ function AddTutorial() {
                     helperText={formik.touched.description && formik.errors.description}
                 />
                 <Button variant="contained" type="submit">
-                    Submit
+                    Add
                 </Button>
             </form>
         </Container>

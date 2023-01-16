@@ -1,9 +1,11 @@
 import './App.css';
-import { Container, AppBar, Toolbar, Typography, Box, Button } from '@mui/material';
+import { Container, AppBar, Toolbar, Typography, Box } from '@mui/material';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Tutorials from './pages/Tutorials';
 import AddTutorial from './pages/AddTutorial';
 import EditTutorial from './pages/EditTutorial';
+import Register from './pages/Register';
+import Login from './pages/Login';
 
 function App() {
   return (
@@ -13,15 +15,15 @@ function App() {
           <Container>
             <Toolbar disableGutters={true}>
               <Link to="/">
-                <Typography variant="h6">
+                <Typography variant="h6" component="div">
                   Learning
                 </Typography>
               </Link>
-              <Link to="/tutorials" >Tutorials</Link>
+              <Link to="/tutorials" ><Typography>Tutorials</Typography></Link>
               <Box sx={{ flexGrow: 1 }}>
               </Box>
-              <Button color="inherit">Register</Button>
-              <Button color="inherit">Login</Button>
+              <Link to="/register" ><Typography>Register</Typography></Link>
+              <Link to="/login" ><Typography>Login</Typography></Link>
             </Toolbar>
           </Container>
         </AppBar>
@@ -31,6 +33,8 @@ function App() {
           <Route path={"/tutorials"} element={<Tutorials />} />
           <Route path={"/addtutorial"} element={<AddTutorial />} />
           <Route path={"/edittutorial/:id"} element={<EditTutorial />} />
+          <Route path={"/register"} element={<Register />} />
+          <Route path={"/login"} element={<Login />} />
         </Routes>
       </Router>
     </div>
