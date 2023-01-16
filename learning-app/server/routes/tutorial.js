@@ -1,16 +1,18 @@
 const express = require('express');
 const router = express.Router();
-const { Tutorial, Sequelize } = require('../models');
+const { User, Tutorial, Sequelize } = require('../models');
+const { validateToken } = require('../middlewares/auth');
 
-router.post("/", async (req, res) => {
+router.post("/", validateToken, async (req, res) => {
     try {
         let tutorial = req.body;
+        tutorial.userId = req.user.id;
         let data = await Tutorial.create(tutorial);
         res.json(data);
     }
-    catch(err) {
+    catch (err) {
         console.log(err);
-        res.status(400).json({message: "Error when creating the tutorial."});
+        res.status(400).json({ message: "Error when creating the tutorial." });
     }
 });
 
@@ -20,22 +22,40 @@ router.get("/", async (req, res) => {
 
     let list = await Tutorial.findAll({
         where: condition,
-        order: [['createdAt', 'DESC']]
+        order: [['createdAt', 'DESC']],
+        include: { model: User, as: "user", attributes: ['name'] }
     });
     res.json(list);
 });
 
 router.get("/:id", async (req, res) => {
     let id = req.params.id;
-    let tutorial = await Tutorial.findByPk(id);
+    let tutorial = await Tutorial.findByPk(id, {
+        include: { model: User, as: "user", attributes: ['name'] }
+    });
+    if (!tutorial) {
+        res.sendStatus(404);
+        return;
+    }
     res.json(tutorial);
 });
 
-router.put("/:id", async (req, res) => {
+router.put("/:id", validateToken, async (req, res) => {
     let id = req.params.id;
-    let tutorial = req.body;
+    let tutorial = await Tutorial.findByPk(id);
+    if (!tutorial) {
+        res.sendStatus(404);
+        return;
+    }
 
-    let num = await Tutorial.update(tutorial, {
+    let userId = req.user.id;
+    if (tutorial.userId != userId) {
+        res.sendStatus(403);
+        return;
+    }
+
+    let data = req.body;
+    let num = await Tutorial.update(data, {
         where: { id: id }
     });
     if (num == 1) {
@@ -50,8 +70,20 @@ router.put("/:id", async (req, res) => {
     }
 });
 
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", validateToken, async (req, res) => {
     let id = req.params.id;
+    let tutorial = await Tutorial.findByPk(id);
+    if (!tutorial) {
+        res.sendStatus(404);
+        return;
+    }
+
+    let userId = req.user.id;
+    if (tutorial.userId != userId) {
+        res.sendStatus(403);
+        return;
+    }
+
     let num = await Tutorial.destroy({
         where: { id: id }
     })

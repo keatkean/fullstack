@@ -19,6 +19,10 @@ module.exports = (sequelize, DataTypes) => {
             foreignKey: "userId",
             onDelete: "cascade"
         });
+        models.Tutorial.belongsTo(User, {
+            foreignKey: "userId",
+            as: 'user'
+        });
     };
 
     return User;
