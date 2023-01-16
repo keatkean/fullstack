@@ -14,12 +14,12 @@ function AddTutorial() {
             description: ""
         },
         validationSchema: Yup.object().shape({
-            title: Yup.string().
-                max(100, 'Title should be of maximum 100 characters length').
-                required('Title is required'),
-            description: Yup.string().
-                max(500, 'Description should be of maximum 500 characters length').
-                required('Description is required')
+            title: Yup.string()
+                .max(100, 'Title should be of maximum 100 characters length')
+                .required('Title is required'),
+            description: Yup.string()
+                .max(500, 'Description should be of maximum 500 characters length')
+                .required('Description is required')
         }),
         onSubmit: (data) => {
             http.post("/tutorial", data)
