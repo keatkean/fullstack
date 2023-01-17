@@ -27,7 +27,7 @@ router.post("/register", async (req, res) => {
     }
     catch (err) {
         console.log(err);
-        res.status(400).json({ message: "Failed to register." });
+        res.status(500).json({ message: "Failed to register." });
     }
 });
 
@@ -64,7 +64,7 @@ router.post("/login", async (req, res) => {
     }
     catch (err) {
         console.log(err);
-        res.status(400).json({ message: "Failed to login." });
+        res.status(500).json({ message: "Failed to login." });
     }
 });
 

@@ -12,7 +12,7 @@ router.post("/", validateToken, async (req, res) => {
     }
     catch (err) {
         console.log(err);
-        res.status(400).json({ message: "Error when creating the tutorial." });
+        res.status(500).json({ message: "Error when creating the tutorial." });
     }
 });
 
