@@ -23,7 +23,7 @@ function Register() {
         initialValues: {
             email: "",
             password: "",
-            username: ""
+            name: ""
         },
         validationSchema: Yup.object().shape({
             email: Yup.string()
@@ -34,12 +34,13 @@ function Register() {
                 .min(8, 'Password should be of minimum 8 characters length')
                 .max(50, 'Password should be of maximum 50 characters length')
                 .required('Password is required'),
-            username: Yup.string()
+            name: Yup.string()
                 .min(3, 'Name should be of minimum 3 characters length')
                 .max(50, 'Name should be of maximum 50 characters length')
                 .required('Name is required')
         }),
         onSubmit: (data) => {
+            //console.log(data);
             http.post("/user/register", data)
                 .then((res) => {
                     console.log(res.data);
@@ -88,12 +89,12 @@ function Register() {
                     />
                     <TextField
                         fullWidth margin="normal" autoComplete="off"
-                        name="username"
+                        name="name"
                         label="Name"
-                        value={formik.values.username}
+                        value={formik.values.name}
                         onChange={formik.handleChange}
-                        error={formik.touched.username && Boolean(formik.errors.username)}
-                        helperText={formik.touched.username && formik.errors.username}
+                        error={formik.touched.name && Boolean(formik.errors.name)}
+                        helperText={formik.touched.name && formik.errors.name}
                     />
                     <Button fullWidth variant="contained" sx={{ mt: 2 }} type="submit">
                         Register
