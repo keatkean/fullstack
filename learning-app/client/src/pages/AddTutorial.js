@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Container, Box, Typography, TextField, Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
@@ -7,6 +7,7 @@ import http from '../http';
 
 function AddTutorial() {
     const navigate = useNavigate();
+    const [imageFile, setImageFile] = useState(null);
 
     const formik = useFormik({
         initialValues: {
@@ -22,6 +23,10 @@ function AddTutorial() {
                 .required('Description is required')
         }),
         onSubmit: (data) => {
+            if (imageFile) {
+                data.imageFile = imageFile;
+            }
+            console.log(data);
             http.post("/tutorial", data)
                 .then((res) => {
                     console.log(res.data);
@@ -32,6 +37,27 @@ function AddTutorial() {
                 });
         }
     });
+
+    const onFileChange = (e) => {
+        let file = e.target.files[0];
+        if (file) {
+            console.log(file);
+            let formData = new FormData();
+            formData.append('file', file);
+            http.post('/file/upload', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            })
+                .then((res) => {
+                    console.log(res.data);
+                    setImageFile(res.data.filename);
+                })
+                .catch(function (error) {
+                    console.log(error.response);
+                });
+        }
+    };
 
     return (
         <Container>
@@ -58,6 +84,12 @@ function AddTutorial() {
                     error={formik.touched.description && Boolean(formik.errors.description)}
                     helperText={formik.touched.description && formik.errors.description}
                 />
+
+                <Button variant="contained" component="label">
+                    Upload Image
+                    <input hidden accept="image/*" multiple type="file" onChange={onFileChange} />
+                </Button>
+
                 <Box sx={{ mt: 2 }}>
                     <Button variant="contained" type="submit">
                         Add

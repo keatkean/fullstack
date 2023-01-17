@@ -4,6 +4,7 @@ npm i express cors dotenv
 npm i nodemon --save-dev
 npm i sequelize mysql2
 npm i bcrypt jsonwebtoken
+npm i multer uuid
 
 client:
 npx create-react-app .
