@@ -56,6 +56,10 @@ function EditTutorial() {
         let file = e.target.files[0];
         if (file) {
             console.log(file);
+            if (file.size > 1024 * 1024) {
+                return;
+            }
+            
             let formData = new FormData();
             formData.append('file', file);
             http.post('/file/upload', formData, {
