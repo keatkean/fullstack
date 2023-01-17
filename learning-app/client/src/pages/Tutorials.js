@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Container, Typography, Button, Grid, Card, CardContent, Box, IconButton, Input } from '@mui/material';
+import { Container, Typography, Button, Grid, Card, CardMedia, CardContent, Box, IconButton, Input } from '@mui/material';
 import { AccessTime, AccountCircle, Edit, Search, Clear } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import moment from 'moment';
@@ -79,6 +79,14 @@ function Tutorials() {
                         return (
                             <Grid item xs={12} md={6} lg={4} key={tutorial.id}>
                                 <Card >
+                                    {
+                                        tutorial.imageFile && (
+                                            <CardMedia
+                                                sx={{ height: 300 }}
+                                                image={`${process.env.REACT_APP_FILE_BASE_URL}${tutorial.imageFile}`}
+                                            />
+                                        )
+                                    }
                                     <CardContent>
                                         <Box sx={{ display: 'flex', mb: 1 }}>
                                             <Typography variant="h6"

@@ -8,14 +8,13 @@ import http from '../http';
 function AddTutorial() {
     const navigate = useNavigate();
 
-    const [tutorial, setTutorial] = useState({
-        title: "",
-        description: "",
-        imageFile: null
-    });
+    const [imageFile, setImageFile] = useState(null);
 
     const formik = useFormik({
-        initialValues: tutorial,
+        initialValues: {
+            title: "",
+            description: ""
+        },
         validationSchema: Yup.object().shape({
             title: Yup.string()
                 .max(100, 'Title should be of maximum 100 characters length')
@@ -25,7 +24,10 @@ function AddTutorial() {
                 .required('Description is required')
         }),
         onSubmit: (data) => {
-            //console.log(data);
+            if (imageFile) {
+                data.imageFile = imageFile;
+            }
+            console.log(data);
             http.post("/tutorial", data)
                 .then((res) => {
                     console.log(res.data);
@@ -50,7 +52,7 @@ function AddTutorial() {
             })
                 .then((res) => {
                     console.log(res.data);
-                    setTutorial({ ...tutorial, imageFile: res.data.filename })
+                    setImageFile(res.data.filename);
                 })
                 .catch(function (error) {
                     console.log(error.response);
@@ -92,10 +94,10 @@ function AddTutorial() {
                             <input hidden accept="image/*" multiple type="file" onChange={onFileChange} />
                         </Button>
                         {
-                            tutorial.imageFile && (
+                            imageFile && (
                                 <Box sx={{ mt: 2 }}>
                                     <Box component="img"
-                                        src={`${process.env.REACT_APP_FILE_BASE_URL}${tutorial.imageFile}`}
+                                        src={`${process.env.REACT_APP_FILE_BASE_URL}${imageFile}`}
                                         alt="tutorial"
                                         sx={{ maxWidth: '100%', maxHeight: '300px' }}>
                                     </Box>

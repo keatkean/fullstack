@@ -12,14 +12,15 @@ function EditTutorial() {
 
     const [tutorial, setTutorial] = useState({
         title: "",
-        description: "",
-        imageFile: null
+        description: ""
     });
+    const [imageFile, setImageFile] = useState(null);
 
     useEffect(() => {
         http.get(`/tutorial/${id}`).then((res) => {
             console.log(res.data);
             setTutorial(res.data);
+            setImageFile(res.data.imageFile);
         });
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
@@ -36,7 +37,10 @@ function EditTutorial() {
                 .required('Description is required')
         }),
         onSubmit: (data) => {
-            //console.log(data);
+            if (imageFile) {
+                data.imageFile = imageFile;
+            }
+            console.log(data);
             http.put(`/tutorial/${id}`, data)
                 .then((res) => {
                     console.log(res.data);
@@ -61,7 +65,7 @@ function EditTutorial() {
             })
                 .then((res) => {
                     console.log(res.data);
-                    setTutorial({ ...tutorial, imageFile: res.data.filename })
+                    setImageFile(res.data.filename);
                 })
                 .catch(function (error) {
                     console.log(error.response);
@@ -125,10 +129,10 @@ function EditTutorial() {
                             <input hidden accept="image/*" multiple type="file" onChange={onFileChange} />
                         </Button>
                         {
-                            tutorial.imageFile && (
+                            imageFile && (
                                 <Box sx={{ mt: 2 }}>
                                     <Box component="img"
-                                        src={`${process.env.REACT_APP_FILE_BASE_URL}${tutorial.imageFile}`}
+                                        src={`${process.env.REACT_APP_FILE_BASE_URL}${imageFile}`}
                                         alt="tutorial"
                                         sx={{ maxWidth: '100%', maxHeight: '300px' }}>
                                     </Box>
