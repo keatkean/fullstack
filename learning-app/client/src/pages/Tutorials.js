@@ -54,7 +54,7 @@ function Tutorials() {
             </Typography>
 
             <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
-                <Input value={search} placeholder="Search by title"
+                <Input value={search} placeholder="Search"
                     onChange={onSearchChange} onKeyDown={onSearchKeyDown} />
                 <IconButton onClick={searchTutorials} color="primary">
                     <Search />
