@@ -21,11 +21,16 @@ function Register() {
 
     const formik = useFormik({
         initialValues: {
+            name: "",
             email: "",
             password: "",
-            name: ""
+            confirmPassword: ""
         },
         validationSchema: Yup.object().shape({
+            name: Yup.string()
+                .min(3, 'Name should be of minimum 3 characters length')
+                .max(50, 'Name should be of maximum 50 characters length')
+                .required('Name is required'),
             email: Yup.string()
                 .email('Enter a valid email')
                 .max(50, 'Email should be of maximum 50 characters length')
@@ -34,10 +39,9 @@ function Register() {
                 .min(8, 'Password should be of minimum 8 characters length')
                 .max(50, 'Password should be of maximum 50 characters length')
                 .required('Password is required'),
-            name: Yup.string()
-                .min(3, 'Name should be of minimum 3 characters length')
-                .max(50, 'Name should be of maximum 50 characters length')
-                .required('Name is required')
+            confirmPassword: Yup.string()
+                .required('Confirm password is required')
+                .oneOf([Yup.ref('password'), null], 'Passwords must match')
         }),
         onSubmit: (data) => {
             //console.log(data);
@@ -70,6 +74,15 @@ function Register() {
                     sx={{ maxWidth: '500px' }}>
                     <TextField
                         fullWidth margin="normal" autoComplete="off"
+                        name="name"
+                        label="Name"
+                        value={formik.values.name}
+                        onChange={formik.handleChange}
+                        error={formik.touched.name && Boolean(formik.errors.name)}
+                        helperText={formik.touched.name && formik.errors.name}
+                    />
+                    <TextField
+                        fullWidth margin="normal" autoComplete="off"
                         name="email"
                         label="Email"
                         value={formik.values.email}
@@ -89,12 +102,13 @@ function Register() {
                     />
                     <TextField
                         fullWidth margin="normal" autoComplete="off"
-                        name="name"
-                        label="Name"
-                        value={formik.values.name}
+                        name="confirmPassword"
+                        type="password"
+                        label="Confirm Password"
+                        value={formik.values.confirmPassword}
                         onChange={formik.handleChange}
-                        error={formik.touched.name && Boolean(formik.errors.name)}
-                        helperText={formik.touched.name && formik.errors.name}
+                        error={formik.touched.confirmPassword && Boolean(formik.errors.confirmPassword)}
+                        helperText={formik.touched.confirmPassword && formik.errors.confirmPassword}
                     />
                     <Button fullWidth variant="contained" sx={{ mt: 2 }} type="submit">
                         Register
