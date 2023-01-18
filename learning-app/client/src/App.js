@@ -29,48 +29,46 @@ function App() {
   };
 
   return (
-    <div>
-      <UserContext.Provider value={{ user, setUser }}>
-        <Router>
-          <AppBar position="static" className='AppBar'>
-            <Container>
-              <Toolbar disableGutters={true}>
-                <Link to="/">
-                  <Typography variant="h6" component="div">
-                    Learning
-                  </Typography>
-                </Link>
-                <Link to="/tutorials" ><Typography>Tutorials</Typography></Link>
-                <Box sx={{ flexGrow: 1 }}>
-                </Box>
-                {user && (
-                  <>
-                    <Typography>{user.name}</Typography>
-                    <Button onClick={logout}>Logout</Button>
-                  </>
-                )
-                }
-                {!user && (
-                  <>
-                    <Link to="/register" ><Typography>Register</Typography></Link>
-                    <Link to="/login" ><Typography>Login</Typography></Link>
-                  </>
-                )}
-              </Toolbar>
-            </Container>
-          </AppBar>
+    <UserContext.Provider value={{ user, setUser }}>
+      <Router>
+        <AppBar position="static" className='AppBar'>
+          <Container>
+            <Toolbar disableGutters={true}>
+              <Link to="/">
+                <Typography variant="h6" component="div">
+                  Learning
+                </Typography>
+              </Link>
+              <Link to="/tutorials" ><Typography>Tutorials</Typography></Link>
+              <Box sx={{ flexGrow: 1 }}>
+              </Box>
+              {user && (
+                <>
+                  <Typography>{user.name}</Typography>
+                  <Button onClick={logout}>Logout</Button>
+                </>
+              )
+              }
+              {!user && (
+                <>
+                  <Link to="/register" ><Typography>Register</Typography></Link>
+                  <Link to="/login" ><Typography>Login</Typography></Link>
+                </>
+              )}
+            </Toolbar>
+          </Container>
+        </AppBar>
 
-          <Routes>
-            <Route path={"/"} element={<Tutorials />} />
-            <Route path={"/tutorials"} element={<Tutorials />} />
-            <Route path={"/addtutorial"} element={<AddTutorial />} />
-            <Route path={"/edittutorial/:id"} element={<EditTutorial />} />
-            <Route path={"/register"} element={<Register />} />
-            <Route path={"/login"} element={<Login />} />
-          </Routes>
-        </Router>
-      </UserContext.Provider>
-    </div>
+        <Routes>
+          <Route path={"/"} element={<Tutorials />} />
+          <Route path={"/tutorials"} element={<Tutorials />} />
+          <Route path={"/addtutorial"} element={<AddTutorial />} />
+          <Route path={"/edittutorial/:id"} element={<EditTutorial />} />
+          <Route path={"/register"} element={<Register />} />
+          <Route path={"/login"} element={<Login />} />
+        </Routes>
+      </Router>
+    </UserContext.Provider>
   );
 }
 
