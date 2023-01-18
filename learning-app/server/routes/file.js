@@ -5,7 +5,7 @@ const { upload } = require('../middlewares/upload');
 require('dotenv').config();
 
 router.post('/upload', validateToken, upload, (req, res) => {
-    console.log(req.file);
+    //console.log(req.file);
     res.json({ filename : req.file.filename });
 });
 
