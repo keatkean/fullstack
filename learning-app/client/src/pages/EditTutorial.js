@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Box, Grid, Typography, TextField, Button } from '@mui/material';
 import { Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@mui/material';
+import AspectRatio from '@mui/joy/AspectRatio';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
@@ -64,7 +65,7 @@ function EditTutorial() {
                 });
                 return;
             }
-            
+
             let formData = new FormData();
             formData.append('file', file);
             http.post('/file/upload', formData, {
@@ -139,13 +140,11 @@ function EditTutorial() {
                         </Button>
                         {
                             imageFile && (
-                                <Box sx={{ mt: 2 }}>
-                                    <Box component="img"
-                                        src={`${process.env.REACT_APP_FILE_BASE_URL}${imageFile}`}
-                                        alt="tutorial"
-                                        sx={{ maxWidth: '100%', maxHeight: '300px' }}>
+                                <AspectRatio sx={{ mt: 2 }}>
+                                    <Box component="img" alt="tutorial"
+                                        src={`${process.env.REACT_APP_FILE_BASE_URL}${imageFile}`}>
                                     </Box>
-                                </Box>
+                                </AspectRatio>
                             )
                         }
                     </Grid>

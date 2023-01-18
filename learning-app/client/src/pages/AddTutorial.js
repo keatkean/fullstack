@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Container, Box, Grid, Typography, TextField, Button } from '@mui/material';
+import AspectRatio from '@mui/joy/AspectRatio';
 import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
@@ -104,13 +105,11 @@ function AddTutorial() {
                         </Button>
                         {
                             imageFile && (
-                                <Box sx={{ mt: 2 }}>
-                                    <Box component="img"
-                                        src={`${process.env.REACT_APP_FILE_BASE_URL}${imageFile}`}
-                                        alt="tutorial"
-                                        sx={{ maxWidth: '100%', maxHeight: '300px' }}>
+                                <AspectRatio sx={{ mt: 2 }}>
+                                    <Box component="img" alt="tutorial"
+                                        src={`${process.env.REACT_APP_FILE_BASE_URL}${imageFile}`}>
                                     </Box>
-                                </Box>
+                                </AspectRatio>
                             )
                         }
                     </Grid>
@@ -121,7 +120,7 @@ function AddTutorial() {
                     </Button>
                 </Box>
             </Box>
-            
+
             <ToastContainer />
         </Container>
     )

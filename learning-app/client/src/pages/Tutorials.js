@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Container, Typography, Button, Grid, Card, CardMedia, CardContent, Box, IconButton, Input } from '@mui/material';
+import { Container, Typography, Button, Grid, Card, CardContent, Box, IconButton, Input } from '@mui/material';
 import { AccessTime, AccountCircle, Edit, Search, Clear } from '@mui/icons-material';
+import AspectRatio from '@mui/joy/AspectRatio';
 import { useNavigate } from 'react-router-dom';
 import moment from 'moment';
 import http from '../http';
@@ -81,10 +82,12 @@ function Tutorials() {
                                 <Card >
                                     {
                                         tutorial.imageFile && (
-                                            <CardMedia
-                                                sx={{ height: 300 }}
-                                                image={`${process.env.REACT_APP_FILE_BASE_URL}${tutorial.imageFile}`}
-                                            />
+                                            <AspectRatio>
+                                                <Box component="img"
+                                                    src={`${process.env.REACT_APP_FILE_BASE_URL}${tutorial.imageFile}`}
+                                                    alt="tutorial">
+                                                </Box>
+                                            </AspectRatio>
                                         )
                                     }
                                     <CardContent>
