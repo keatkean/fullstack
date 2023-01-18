@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import UserContext from '../contexts/UserContext';
@@ -14,10 +13,6 @@ const AuthGuard = ({ children }) => {
     }, [user, navigate]);
 
     return children;
-};
-
-AuthGuard.propTypes = {
-    children: PropTypes.node
 };
 
 export default AuthGuard;
