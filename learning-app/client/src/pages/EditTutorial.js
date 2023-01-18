@@ -60,9 +60,7 @@ function EditTutorial() {
         if (file) {
             console.log(file);
             if (file.size > 1024 * 1024) {
-                toast.error('Maximum file size is 1MB', {
-                    position: toast.POSITION.TOP_RIGHT
-                });
+                toast.error('Maximum file size is 1MB');
                 return;
             }
 

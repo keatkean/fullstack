@@ -37,9 +37,7 @@ function Login() {
                 })
                 .catch(function (error) {
                     console.log(error.response);
-                    toast.error(`${error.response.data.message}`, {
-                        position: toast.POSITION.TOP_RIGHT
-                    });
+                    toast.error(`${error.response.data.message}`);
                 });
         }
     });
