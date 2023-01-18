@@ -5,6 +5,8 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import http from '../http';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function EditTutorial() {
     const navigate = useNavigate();
@@ -57,6 +59,9 @@ function EditTutorial() {
         if (file) {
             console.log(file);
             if (file.size > 1024 * 1024) {
+                toast.error('Maximum file size is 1MB', {
+                    position: toast.POSITION.TOP_RIGHT
+                });
                 return;
             }
             
@@ -173,6 +178,8 @@ function EditTutorial() {
                     </Button>
                 </DialogActions>
             </Dialog>
+
+            <ToastContainer />
         </Container>
     )
 }
