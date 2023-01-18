@@ -9,6 +9,7 @@ import Login from './pages/Login';
 import { useState, useEffect } from 'react';
 import UserContext from './contexts/UserContext';
 import http from './http';
+import AuthGuard from './utils/AuthGuard';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -62,8 +63,8 @@ function App() {
         <Routes>
           <Route path={"/"} element={<Tutorials />} />
           <Route path={"/tutorials"} element={<Tutorials />} />
-          <Route path={"/addtutorial"} element={<AddTutorial />} />
-          <Route path={"/edittutorial/:id"} element={<EditTutorial />} />
+          <Route path={"/addtutorial"} element={<AuthGuard><AddTutorial /></AuthGuard>} />
+          <Route path={"/edittutorial/:id"} element={<AuthGuard><EditTutorial /></AuthGuard>} />
           <Route path={"/register"} element={<Register />} />
           <Route path={"/login"} element={<Login />} />
         </Routes>
