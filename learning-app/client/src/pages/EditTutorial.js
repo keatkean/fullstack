@@ -132,10 +132,12 @@ function EditTutorial() {
                         />
                     </Grid>
                     <Grid item xs={12} md={6} lg={4}>
-                        <Button variant="contained" component="label" sx={{ mt: 2 }}>
-                            Upload Image
-                            <input hidden accept="image/*" multiple type="file" onChange={onFileChange} />
-                        </Button>
+                        <Box sx={{ textAlign: 'center', mt: 2 }} >
+                            <Button variant="contained" component="label">
+                                Upload Image
+                                <input hidden accept="image/*" multiple type="file" onChange={onFileChange} />
+                            </Button>
+                        </Box>
                         {
                             imageFile && (
                                 <AspectRatio sx={{ mt: 2 }}>
