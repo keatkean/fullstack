@@ -29,7 +29,7 @@ instance.interceptors.response.use(function (response) {
     console.log(error.response);
     if (error.response.status === 401 || error.response.status === 403) {
         localStorage.clear();
-        window.location.replace("/login");
+        window.location = "/login";
     }
     return Promise.reject(error);
 });

@@ -24,8 +24,7 @@ function App() {
 
   const logout = () => {
     localStorage.clear();
-    setUser(null);
-    window.location.replace("/");
+    window.location = "/";
   };
 
   return (
