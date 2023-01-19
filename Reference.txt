@@ -19,15 +19,7 @@ https://github.com/machadop1407/FullStack-Course
 16 Update Password
 17 Deploying the Website
 
-React + Node.js + Express + MySQL example: Build a CRUD App
-https://www.bezkoder.com/react-node-express-mysql/
-Node.js sample Projects - Node.js Tutorials
-https://github.com/bezkoder/node-js-tutorials
-React.js CRUD App with React Router & Axios
-https://github.com/bezkoder/react-crud-web-api
-Node.js Rest APIs with Express, Sequelize & MySQL example
-https://github.com/bezkoder/nodejs-express-sequelize-mysql
-
+React Material UI examples with a CRUD Application
 https://www.bezkoder.com/react-material-ui-examples-crud/
 https://github.com/bezkoder/react-material-ui-examples
 https://github.com/bezkoder/nodejs-express-sequelize-mysql
