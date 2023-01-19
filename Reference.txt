@@ -19,6 +19,10 @@ https://github.com/machadop1407/FullStack-Course
 16 Update Password
 17 Deploying the Website
 
+MUI
+https://mui.com/material-ui/react-grid/
+https://mui.com/material-ui/getting-started/templates/
+
 React Material UI examples with a CRUD Application
 https://www.bezkoder.com/react-material-ui-examples-crud/
 https://github.com/bezkoder/react-material-ui-examples
@@ -26,5 +30,6 @@ https://github.com/bezkoder/nodejs-express-sequelize-mysql
 
 Sequelize
 https://sequelize.org/docs/v6/core-concepts/model-basics/
+
 React Forms
 https://www.w3schools.com/react/react_forms.asp
