@@ -30,4 +30,14 @@ router.get("/", async (req, res) => {
     res.json(list);
 });
 
+router.get("/:id", async (req, res) => {
+    let id = req.params.id;
+    let tutorial = await Tutorial.findByPk(id);
+    if (!tutorial) {
+        res.sendStatus(404);
+        return;
+    }
+    res.json(tutorial);
+});
+
 module.exports = router;
