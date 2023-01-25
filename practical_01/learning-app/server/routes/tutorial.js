@@ -1,13 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const { Tutorial } = require('../models');
 
 let tutorialList = [];
 
-router.post("/", async (req, res) => {
+router.post("/", (req, res) => {
     let tutorial = req.body;
-    let data = await Tutorial.create(tutorial);
-    res.json(data);
+    tutorialList.push(tutorial);
+    res.json(tutorial);
 });
 
 router.get("/", (req, res) => {
