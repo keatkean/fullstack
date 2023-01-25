@@ -15,10 +15,7 @@ app.get("/", (req, res) => {
 const tutorialRoute = require('./routes/tutorial');
 app.use("/tutorial", tutorialRoute);
 
-const db = require('./models');
-db.sequelize.sync({ alter: true }).then(() => {
-    let port = process.env.APP_PORT;
-    app.listen(port, () => {
-        console.log(`⚡ Sever running on http://localhost:${port}`);
-    });
+let port = process.env.APP_PORT;
+app.listen(port, () => {
+    console.log(`⚡ Sever running on http://localhost:${port}`);
 });
