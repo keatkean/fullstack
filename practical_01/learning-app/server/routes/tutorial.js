@@ -5,9 +5,15 @@ const { Tutorial } = require('../models');
 let tutorialList = [];
 
 router.post("/", async (req, res) => {
-    let tutorial = req.body;
-    let data = await Tutorial.create(tutorial);
-    res.json(data);
+    try {
+        let tutorial = req.body;
+        let data = await Tutorial.create(tutorial);
+        res.json(data);
+    }
+    catch (err) {
+        console.log(err);
+        res.status(500).json({ message: "Error when creating the tutorial." });
+    }
 });
 
 router.get("/", (req, res) => {
