@@ -2,18 +2,31 @@ const express = require('express');
 const router = express.Router();
 const { User, Tutorial, Sequelize } = require('../models');
 const { validateToken } = require('../middlewares/auth');
+const yup = require("yup");
+
+const validationSchema = yup.object().shape({
+    title: yup.string()
+        .max(100, 'Title should be of maximum 100 characters length')
+        .required('Title is required'),
+    description: yup.string()
+        .max(500, 'Description should be of maximum 500 characters length')
+        .required('Description is required')
+});
 
 router.post("/", validateToken, async (req, res) => {
+    let tutorial = req.body;
     try {
-        let tutorial = req.body;
-        tutorial.userId = req.user.id;
-        let data = await Tutorial.create(tutorial);
-        res.json(data);
+        await validationSchema.validate(tutorial, { abortEarly: false });
     }
     catch (err) {
-        console.log(err);
-        res.status(500).json({ message: "Error when creating the tutorial." });
+        console.error(err);
+        res.status(400).json({ errors: err.errors });
+        return;
     }
+
+    tutorial.userId = req.user.id;
+    let data = await Tutorial.create(tutorial);
+    res.json(data);
 });
 
 router.get("/", async (req, res) => {
