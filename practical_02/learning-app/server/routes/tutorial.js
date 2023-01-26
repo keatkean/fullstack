@@ -3,15 +3,9 @@ const router = express.Router();
 const { Tutorial, Sequelize } = require('../models');
 
 router.post("/", async (req, res) => {
-    try {
-        let tutorial = req.body;
-        let data = await Tutorial.create(tutorial);
-        res.json(data);
-    }
-    catch (err) {
-        console.log(err);
-        res.status(500).json({ message: "Error when creating the tutorial." });
-    }
+    let data = req.body;
+    let result = await Tutorial.create(data);
+    res.json(result);
 });
 
 router.get("/", async (req, res) => {
