@@ -90,4 +90,28 @@ router.put("/:id", async (req, res) => {
     }
 });
 
+router.delete("/:id", async (req, res) => {
+    let id = req.params.id;
+    // Check id not found
+    let tutorial = await Tutorial.findByPk(id);
+    if (!tutorial) {
+        res.sendStatus(404);
+        return;
+    }
+
+    let num = await Tutorial.destroy({
+        where: { id: id }
+    })
+    if (num == 1) {
+        res.json({
+            message: "Tutorial was deleted successfully."
+        });
+    }
+    else {
+        res.status(400).json({
+            message: `Cannot delete tutorial with id ${id}.`
+        });
+    }
+});
+
 module.exports = router;
