@@ -4,9 +4,9 @@ const router = express.Router();
 let tutorialList = [];
 
 router.post("/", (req, res) => {
-    let tutorial = req.body;
-    tutorialList.push(tutorial);
-    res.json(tutorial);
+    let data = req.body;
+    tutorialList.push(data);
+    res.json(data);
 });
 
 router.get("/", (req, res) => {
