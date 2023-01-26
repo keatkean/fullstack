@@ -14,9 +14,9 @@ const validationSchema = yup.object().shape({
 });
 
 router.post("/", validateToken, async (req, res) => {
-    let tutorial = req.body;
+    let data = req.body;
     try {
-        await validationSchema.validate(tutorial, { abortEarly: false });
+        await validationSchema.validate(data, { abortEarly: false });
     }
     catch (err) {
         console.error(err);
@@ -24,9 +24,9 @@ router.post("/", validateToken, async (req, res) => {
         return;
     }
 
-    tutorial.userId = req.user.id;
-    let data = await Tutorial.create(tutorial);
-    res.json(data);
+    data.userId = req.user.id;
+    let tutorial = await Tutorial.create(data);
+    res.json(tutorial);
 });
 
 router.get("/", async (req, res) => {
@@ -74,6 +74,15 @@ router.put("/:id", validateToken, async (req, res) => {
     }
 
     let data = req.body;
+    try {
+        await validationSchema.validate(data, { abortEarly: false });
+    }
+    catch (err) {
+        console.error(err);
+        res.status(400).json({ errors: err.errors });
+        return;
+    }
+    
     let num = await Tutorial.update(data, {
         where: { id: id }
     });
