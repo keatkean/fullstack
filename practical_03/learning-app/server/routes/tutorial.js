@@ -43,6 +43,7 @@ router.get("/", async (req, res) => {
 router.get("/:id", async (req, res) => {
     let id = req.params.id;
     let tutorial = await Tutorial.findByPk(id);
+    // Check id not found
     if (!tutorial) {
         res.sendStatus(404);
         return;
