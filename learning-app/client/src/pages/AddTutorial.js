@@ -3,7 +3,7 @@ import { Container, Box, Grid, Typography, TextField, Button } from '@mui/materi
 import AspectRatio from '@mui/joy/AspectRatio';
 import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
-import * as Yup from 'yup';
+import * as yup from 'yup';
 import http from '../http';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -18,12 +18,12 @@ function AddTutorial() {
             title: "",
             description: ""
         },
-        validationSchema: Yup.object().shape({
-            title: Yup.string()
-                .max(100, 'Title should be of maximum 100 characters length')
+        validationSchema: yup.object().shape({
+            title: yup.string()
+                .max(100, 'Title must be at most 100 characters')
                 .required('Title is required'),
-            description: Yup.string()
-                .max(500, 'Description should be of maximum 500 characters length')
+            description: yup.string()
+                .max(500, 'Description must be at most 500 characters')
                 .required('Description is required')
         }),
         onSubmit: (data) => {

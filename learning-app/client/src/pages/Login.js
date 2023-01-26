@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { Container, Box, Typography, TextField, Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
-import * as Yup from 'yup';
+import * as yup from 'yup';
 import http from '../http';
 import UserContext from '../contexts/UserContext';
 import { ToastContainer, toast } from 'react-toastify';
@@ -17,14 +17,14 @@ function Login() {
             email: "",
             password: ""
         },
-        validationSchema: Yup.object().shape({
-            email: Yup.string()
+        validationSchema: yup.object().shape({
+            email: yup.string()
                 .email('Enter a valid email')
-                .max(50, 'Email should be of maximum 50 characters length')
+                .max(50, 'Email must be at most 50 characters')
                 .required('Email is required'),
-            password: Yup.string()
-                .min(8, 'Password should be of minimum 8 characters length')
-                .max(50, 'Password should be of maximum 50 characters length')
+            password: yup.string()
+                .min(8, 'Password must be at least 8 characters')
+                .max(50, 'Password must be at most 50 characters')
                 .required('Password is required')
         }),
         onSubmit: (data) => {

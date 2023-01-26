@@ -2,7 +2,7 @@ import React from 'react';
 import { Container, Box, Typography, TextField, Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
-import * as Yup from 'yup';
+import * as yup from 'yup';
 import http from '../http';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -17,22 +17,22 @@ function Register() {
             password: "",
             confirmPassword: ""
         },
-        validationSchema: Yup.object().shape({
-            name: Yup.string()
-                .min(3, 'Name should be of minimum 3 characters length')
-                .max(50, 'Name should be of maximum 50 characters length')
+        validationSchema: yup.object().shape({
+            name: yup.string()
+                .min(3, 'Name must be at least 3 characters')
+                .max(50, 'Name must be at most 50 characters')
                 .required('Name is required'),
-            email: Yup.string()
+            email: yup.string()
                 .email('Enter a valid email')
-                .max(50, 'Email should be of maximum 50 characters length')
+                .max(50, 'Email must be at most 50 characters')
                 .required('Email is required'),
-            password: Yup.string()
-                .min(8, 'Password should be of minimum 8 characters length')
-                .max(50, 'Password should be of maximum 50 characters length')
+            password: yup.string()
+                .min(8, 'Password must be at least 8 characters')
+                .max(50, 'Password must be at most 50 characters')
                 .required('Password is required'),
-            confirmPassword: Yup.string()
+            confirmPassword: yup.string()
                 .required('Confirm password is required')
-                .oneOf([Yup.ref('password'), null], 'Passwords must match')
+                .oneOf([yup.ref('password'), null], 'Passwords must match')
         }),
         onSubmit: (data) => {
             //console.log(data);
