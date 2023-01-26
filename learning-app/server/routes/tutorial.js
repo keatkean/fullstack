@@ -4,17 +4,12 @@ const { User, Tutorial, Sequelize } = require('../models');
 const { validateToken } = require('../middlewares/auth');
 const yup = require("yup");
 
-const validationSchema = yup.object().shape({
-    title: yup.string()
-        .max(100, 'Title should be of maximum 100 characters length')
-        .required('Title is required'),
-    description: yup.string()
-        .max(500, 'Description should be of maximum 500 characters length')
-        .required('Description is required')
-});
-
 router.post("/", validateToken, async (req, res) => {
     let data = req.body;
+    let validationSchema = yup.object().shape({
+        title: yup.string().max(100).required(),
+        description: yup.string().max(500).required()
+    });
     try {
         await validationSchema.validate(data, { abortEarly: false });
     }
@@ -25,8 +20,8 @@ router.post("/", validateToken, async (req, res) => {
     }
 
     data.userId = req.user.id;
-    let tutorial = await Tutorial.create(data);
-    res.json(tutorial);
+    let result = await Tutorial.create(data);
+    res.json(result);
 });
 
 router.get("/", async (req, res) => {
@@ -74,6 +69,10 @@ router.put("/:id", validateToken, async (req, res) => {
     }
 
     let data = req.body;
+    let validationSchema = yup.object().shape({
+        title: yup.string().max(100),
+        description: yup.string().max(500)
+    });
     try {
         await validationSchema.validate(data, { abortEarly: false });
     }
@@ -82,7 +81,7 @@ router.put("/:id", validateToken, async (req, res) => {
         res.status(400).json({ errors: err.errors });
         return;
     }
-    
+
     let num = await Tutorial.update(data, {
         where: { id: id }
     });
