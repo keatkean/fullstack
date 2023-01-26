@@ -11,6 +11,6 @@ module.exports = (sequelize, DataTypes) => {
         imageFile: {
             type: DataTypes.STRING
         }
-    });
+    }, { paranoid: true });
     return Tutorial;
 }

@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false
         }
-    });
+    }, { paranoid: true });
 
     User.associate = (models) => {
         User.hasMany(models.Tutorial, {
