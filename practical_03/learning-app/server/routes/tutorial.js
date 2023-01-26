@@ -1,17 +1,27 @@
 const express = require('express');
 const router = express.Router();
 const { Tutorial, Sequelize } = require('../models');
+const yup = require("yup");
 
 router.post("/", async (req, res) => {
+    let data = req.body;
+    // Validate request body
+    let validationSchema = yup.object().shape({
+        title: yup.string().max(100).required(),
+        description: yup.string().max(500).required()
+    });
     try {
-        let tutorial = req.body;
-        let data = await Tutorial.create(tutorial);
-        res.json(data);
+        await validationSchema.validate(data, { abortEarly: false });
     }
     catch (err) {
-        console.log(err);
-        res.status(500).json({ message: "Error when creating the tutorial." });
+        console.error(err);
+        res.status(400).json({ errors: err.errors });
+        return;
     }
+
+    data.userId = req.user.id;
+    let result = await Tutorial.create(data);
+    res.json(result);
 });
 
 router.get("/", async (req, res) => {
@@ -42,6 +52,7 @@ router.get("/:id", async (req, res) => {
 
 router.put("/:id", async (req, res) => {
     let id = req.params.id;
+    // Check id not found
     let tutorial = await Tutorial.findByPk(id);
     if (!tutorial) {
         res.sendStatus(404);
@@ -49,6 +60,20 @@ router.put("/:id", async (req, res) => {
     }
     
     let data = req.body;
+    // Validate request body
+    let validationSchema = yup.object().shape({
+        title: yup.string().max(100),
+        description: yup.string().max(500)
+    });
+    try {
+        await validationSchema.validate(data, { abortEarly: false });
+    }
+    catch (err) {
+        console.error(err);
+        res.status(400).json({ errors: err.errors });
+        return;
+    }
+
     let num = await Tutorial.update(data, {
         where: { id: id }
     });
