@@ -5,6 +5,7 @@ const { validateToken } = require('../middlewares/auth');
 const yup = require("yup");
 
 router.post("/", validateToken, async (req, res) => {
+    // Validate request body
     let data = req.body;
     let validationSchema = yup.object().shape({
         title: yup.string().max(100).required(),
@@ -55,6 +56,7 @@ router.get("/:id", async (req, res) => {
 });
 
 router.put("/:id", validateToken, async (req, res) => {
+    // Check id not found
     let id = req.params.id;
     let tutorial = await Tutorial.findByPk(id);
     if (!tutorial) {
@@ -62,12 +64,14 @@ router.put("/:id", validateToken, async (req, res) => {
         return;
     }
 
+    // Check unauthorized
     let userId = req.user.id;
     if (tutorial.userId != userId) {
         res.sendStatus(403);
         return;
     }
 
+    // Validate request body
     let data = req.body;
     let validationSchema = yup.object().shape({
         title: yup.string().max(100),
@@ -98,6 +102,7 @@ router.put("/:id", validateToken, async (req, res) => {
 });
 
 router.delete("/:id", validateToken, async (req, res) => {
+    // Check id not found
     let id = req.params.id;
     let tutorial = await Tutorial.findByPk(id);
     if (!tutorial) {
@@ -105,6 +110,7 @@ router.delete("/:id", validateToken, async (req, res) => {
         return;
     }
 
+    // Check unauthorized
     let userId = req.user.id;
     if (tutorial.userId != userId) {
         res.sendStatus(403);

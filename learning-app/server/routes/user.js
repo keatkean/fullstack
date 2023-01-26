@@ -8,7 +8,7 @@ const yup = require("yup");
 require('dotenv').config();
 
 router.post("/register", async (req, res) => {
-    // Validate input
+    // Validate request body
     let data = req.body;
     let validationSchema = yup.object().shape({
         name: yup.string().min(3).max(50).required(),
@@ -24,7 +24,7 @@ router.post("/register", async (req, res) => {
         return;
     }
 
-    // Validate email
+    // Check email
     let user = await User.findOne({
         where: { email: data.email }
     });
@@ -44,7 +44,7 @@ router.post("/register", async (req, res) => {
 });
 
 router.post("/login", async (req, res) => {
-    // Validate input
+    // Validate request body
     let data = req.body;
     let validationSchema = yup.object().shape({
         email: yup.string().email().max(50).required(),
@@ -59,7 +59,7 @@ router.post("/login", async (req, res) => {
         return;
     }
 
-    // Validate email and password
+    // Check email and password
     let errorMsg = "Email or password is not correct.";
     let user = await User.findOne({
         where: { email: data.email }
