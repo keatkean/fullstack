@@ -1,24 +1,29 @@
-import logo from './logo.svg';
 import './App.css';
+import { Container, AppBar, Toolbar, Typography } from '@mui/material';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <AppBar position="static" className='AppBar'>
+        <Container>
+          <Toolbar disableGutters={true}>
+            <Link to="/">
+              <Typography variant="h6" component="div">
+                Learning
+              </Typography>
+            </Link>
+            <Link to="/tutorials" ><Typography>Tutorials</Typography></Link>
+          </Toolbar>
+        </Container>
+      </AppBar>
+
+      <Routes>
+        <Route path={"/"} />
+        <Route path={"/tutorials"} />
+        <Route path={"/addtutorial"} />
+      </Routes>
+    </Router>
   );
 }
 
