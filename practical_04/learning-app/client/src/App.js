@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 function App() {
   return (
     <Router>
-      <AppBar position="static" className='AppBar'>
+      <AppBar position="static" className="AppBar">
         <Container>
           <Toolbar disableGutters={true}>
             <Link to="/">
