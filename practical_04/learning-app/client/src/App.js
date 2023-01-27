@@ -23,7 +23,6 @@ function App() {
         <Routes>
           <Route path={"/"} element={<Tutorials />} />
           <Route path={"/tutorials"} element={<Tutorials />} />
-          <Route path={"/addtutorial"} />
         </Routes>
       </Container>
     </Router>
