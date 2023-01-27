@@ -18,11 +18,13 @@ function App() {
         </Container>
       </AppBar>
 
-      <Routes>
-        <Route path={"/"} />
-        <Route path={"/tutorials"} />
-        <Route path={"/addtutorial"} />
-      </Routes>
+      <Container>
+        <Routes>
+          <Route path={"/"} />
+          <Route path={"/tutorials"} />
+          <Route path={"/addtutorial"} />
+        </Routes>
+      </Container>
     </Router>
   );
 }
