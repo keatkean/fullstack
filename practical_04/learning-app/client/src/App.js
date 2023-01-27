@@ -1,6 +1,7 @@
 import './App.css';
 import { Container, AppBar, Toolbar, Typography } from '@mui/material';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import Tutorials from './pages/Tutorials';
 
 function App() {
   return (
@@ -20,8 +21,8 @@ function App() {
 
       <Container>
         <Routes>
-          <Route path={"/"} />
-          <Route path={"/tutorials"} />
+          <Route path={"/"} element={<Tutorials />} />
+          <Route path={"/tutorials"} element={<Tutorials />} />
           <Route path={"/addtutorial"} />
         </Routes>
       </Container>
