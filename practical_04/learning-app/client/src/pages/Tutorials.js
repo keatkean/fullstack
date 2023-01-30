@@ -1,9 +1,16 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import http from '../http';
 
 function Tutorials() {
-  return (
-    <div>Tutorials</div>
-  )
+    useEffect(() => {
+        http.get('/tutorial').then((res) => {
+            console.log(res.data);
+        });
+    }, []);
+
+    return (
+        <div>Tutorials</div>
+    )
 }
 
 export default Tutorials
