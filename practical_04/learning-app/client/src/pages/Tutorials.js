@@ -20,7 +20,7 @@ function Tutorials() {
 
             <Grid container spacing={2}>
                 {
-                    tutorialList && tutorialList.map((tutorial, i) => {
+                    tutorialList.map((tutorial, i) => {
                         return (
                             <Grid item xs={12} md={6} lg={4} key={tutorial.id}>
                                 <Card >
