@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
+import { Box, Typography, Grid, Card, CardContent } from '@mui/material';
 import http from '../http';
-import { Typography, Grid, Card, CardContent, Box } from '@mui/material';
 
 function Tutorials() {
     const [tutorialList, setTutorialList] = useState([]);
@@ -39,7 +39,7 @@ function Tutorials() {
                 }
             </Grid>
         </Box>
-    )
+    );
 }
 
-export default Tutorials
+export default Tutorials;
