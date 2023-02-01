@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Box, Typography, Grid, Card, CardContent } from '@mui/material';
+import { AccessTime } from '@mui/icons-material';
 import http from '../http';
 
 function Tutorials() {
@@ -25,9 +26,16 @@ function Tutorials() {
                             <Grid item xs={12} md={6} lg={4} key={tutorial.id}>
                                 <Card >
                                     <CardContent>
-                                        <Typography variant="h6">
+                                        <Typography variant="h6" sx={{ mb: 1 }}>
                                             {tutorial.title}
                                         </Typography>
+                                        <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}
+                                            color="text.secondary">
+                                            <AccessTime sx={{ mr: 1 }} />
+                                            <Typography>
+                                                {tutorial.createdAt}
+                                            </Typography>
+                                        </Box>
                                         <Typography>
                                             {tutorial.description}
                                         </Typography>
