@@ -24,7 +24,7 @@ function Tutorials() {
                     tutorialList.map((tutorial, i) => {
                         return (
                             <Grid item xs={12} md={6} lg={4} key={tutorial.id}>
-                                <Card >
+                                <Card>
                                     <CardContent>
                                         <Typography variant="h6" sx={{ mb: 1 }}>
                                             {tutorial.title}
