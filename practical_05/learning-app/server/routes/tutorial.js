@@ -19,7 +19,6 @@ router.post("/", async (req, res) => {
         return;
     }
 
-    data.userId = req.user.id;
     let result = await Tutorial.create(data);
     res.json(result);
 });
