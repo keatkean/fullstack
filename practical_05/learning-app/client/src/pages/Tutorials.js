@@ -12,12 +12,37 @@ function Tutorials() {
         setSearch(e.target.value);
     };
 
-    useEffect(() => {
+    const getTutorials = () => {
         http.get('/tutorial').then((res) => {
-            console.log(res.data);
             setTutorialList(res.data);
         });
+    };
+
+    const searchTutorials = () => {
+        http.get(`/tutorial?search=${search}`).then((res) => {
+            setTutorialList(res.data);
+        });
+    };
+
+    useEffect(() => {
+        getTutorials();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
+
+    const onSearchKeyDown = (e) => {
+        if (e.keyCode === 13) {
+            searchTutorials();
+        }
+    };
+
+    const onClickSearch = () => {
+        searchTutorials();
+    }
+
+    const onClickClear = () => {
+        setSearch('');
+        getTutorials();
+    };
 
     return (
         <Box>
@@ -26,11 +51,15 @@ function Tutorials() {
             </Typography>
 
             <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
-                <Input value={search} placeholder="Search" onChange={onSearchChange} />
-                <IconButton color="primary">
+                <Input value={search} placeholder="Search"
+                    onChange={onSearchChange}
+                    onKeyDown={onSearchKeyDown} />
+                <IconButton color="primary"
+                    onClick={onClickSearch}>
                     <Search />
                 </IconButton>
-                <IconButton color="primary">
+                <IconButton color="primary"
+                    onClick={onClickClear}>
                     <Clear />
                 </IconButton>
             </Box>
