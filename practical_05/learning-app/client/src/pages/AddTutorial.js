@@ -1,10 +1,13 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Box, Typography, TextField, Button } from '@mui/material';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import http from '../http';
 
 function AddTutorial() {
+    const navigate = useNavigate();
+
     const formik = useFormik({
         initialValues: {
             title: "",
@@ -22,6 +25,7 @@ function AddTutorial() {
             http.post("/tutorial", data)
                 .then((res) => {
                     console.log(res.data);
+                    navigate("/tutorials");
                 });
         }
     });
