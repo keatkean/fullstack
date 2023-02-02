@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Box, Typography, Grid, Card, CardContent, Input, IconButton, Button } from '@mui/material';
 import { AccessTime, Search, Clear } from '@mui/icons-material';
 import http from '../http';
 import moment from 'moment';
 
+const linkStyle = {
+    textDecoration: 'none'
+};
+
 function Tutorials() {
     const [tutorialList, setTutorialList] = useState([]);
     const [search, setSearch] = useState('');
-    const navigate = useNavigate();
 
     const onSearchChange = (e) => {
         setSearch(e.target.value);
@@ -65,10 +68,11 @@ function Tutorials() {
                     <Clear />
                 </IconButton>
                 <Box sx={{ flexGrow: 1 }} />
-                <Button variant='contained'
-                    onClick={() => { navigate('/addtutorial') }}>
-                    Add
-                </Button>
+                <Link to="/addtutorial" style={linkStyle}>
+                    <Button variant='contained'>
+                        Add
+                    </Button>
+                </Link>
             </Box>
 
             <Grid container spacing={2}>
