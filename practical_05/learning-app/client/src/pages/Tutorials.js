@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Typography, Grid, Card, CardContent, Input, IconButton } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import { Box, Typography, Grid, Card, CardContent, Input, IconButton, Button } from '@mui/material';
 import { AccessTime, Search, Clear } from '@mui/icons-material';
 import http from '../http';
 import moment from 'moment';
@@ -7,6 +8,7 @@ import moment from 'moment';
 function Tutorials() {
     const [tutorialList, setTutorialList] = useState([]);
     const [search, setSearch] = useState('');
+    const navigate = useNavigate();
 
     const onSearchChange = (e) => {
         setSearch(e.target.value);
@@ -62,6 +64,11 @@ function Tutorials() {
                     onClick={onClickClear}>
                     <Clear />
                 </IconButton>
+                <Box sx={{ flexGrow: 1 }} />
+                <Button variant='contained'
+                    onClick={() => { navigate('/addtutorial') }}>
+                    Add
+                </Button>
             </Box>
 
             <Grid container spacing={2}>
