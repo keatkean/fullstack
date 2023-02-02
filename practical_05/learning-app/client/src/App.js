@@ -2,6 +2,7 @@ import './App.css';
 import { Container, AppBar, Toolbar, Typography } from '@mui/material';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Tutorials from './pages/Tutorials';
+import AddTutorial from './pages/AddTutorial';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Routes>
           <Route path={"/"} element={<Tutorials />} />
           <Route path={"/tutorials"} element={<Tutorials />} />
+          <Route path={"/addtutorial"} element={<AddTutorial />} />
         </Routes>
       </Container>
     </Router>
