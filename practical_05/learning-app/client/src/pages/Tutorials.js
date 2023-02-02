@@ -5,10 +5,6 @@ import { AccessTime, Search, Clear } from '@mui/icons-material';
 import http from '../http';
 import moment from 'moment';
 
-const linkStyle = {
-    textDecoration: 'none'
-};
-
 function Tutorials() {
     const [tutorialList, setTutorialList] = useState([]);
     const [search, setSearch] = useState('');
@@ -68,7 +64,7 @@ function Tutorials() {
                     <Clear />
                 </IconButton>
                 <Box sx={{ flexGrow: 1 }} />
-                <Link to="/addtutorial" style={linkStyle}>
+                <Link to="/addtutorial" style={{ textDecoration: 'none' }}>
                     <Button variant='contained'>
                         Add
                     </Button>
