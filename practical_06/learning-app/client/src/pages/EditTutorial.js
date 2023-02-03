@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Box, Typography, TextField, Button } from '@mui/material';
+import { Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@mui/material';
 import http from '../http';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
@@ -41,6 +42,16 @@ function EditTutorial() {
         }
     });
 
+    const [open, setOpen] = useState(false);
+
+    const handleOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
     const deleteTutorial = () => {
         http.delete(`/tutorial/${id}`)
             .then((res) => {
@@ -79,11 +90,30 @@ function EditTutorial() {
                         Update
                     </Button>
                     <Button variant="contained" sx={{ ml: 2 }} color="error"
-                        onClick={deleteTutorial}>
+                        onClick={handleOpen}>
                         Delete
                     </Button>
                 </Box>
             </Box>
+
+            <Dialog open={open} onClose={handleClose}>
+                <DialogTitle>
+                    Delete Tutorial
+                </DialogTitle>
+                <DialogContent>
+                    <DialogContentText>
+                        Are you sure you want to delete this tutorial?
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleClose} variant="contained" color="inherit">
+                        Cancel
+                    </Button>
+                    <Button onClick={deleteTutorial} variant="contained" color="error">
+                        Delete
+                    </Button>
+                </DialogActions>
+            </Dialog>
         </Box>
     );
 }
