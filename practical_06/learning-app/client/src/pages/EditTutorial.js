@@ -41,6 +41,14 @@ function EditTutorial() {
         }
     });
 
+    const deleteTutorial = () => {
+        http.delete(`/tutorial/${id}`)
+            .then((res) => {
+                console.log(res.data);
+                navigate("/tutorials");
+            });
+    }
+
     return (
         <Box>
             <Typography variant="h5" sx={{ my: 2 }}>
@@ -69,6 +77,10 @@ function EditTutorial() {
                 <Box sx={{ mt: 2 }}>
                     <Button variant="contained" type="submit">
                         Update
+                    </Button>
+                    <Button variant="contained" sx={{ ml: 2 }} color="error"
+                        onClick={deleteTutorial}>
+                        Delete
                     </Button>
                 </Box>
             </Box>
