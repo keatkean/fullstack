@@ -106,10 +106,12 @@ function EditTutorial() {
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleClose} variant="contained" color="inherit">
+                    <Button variant="contained" color="inherit"
+                        onClick={handleClose}>
                         Cancel
                     </Button>
-                    <Button onClick={deleteTutorial} variant="contained" color="error">
+                    <Button variant="contained" color="error"
+                        onClick={deleteTutorial}>
                         Delete
                     </Button>
                 </DialogActions>
