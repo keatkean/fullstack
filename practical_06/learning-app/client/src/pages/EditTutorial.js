@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { Box, Typography, TextField, Button } from '@mui/material';
 import http from '../http';
 import { useFormik } from 'formik';
@@ -7,6 +7,7 @@ import * as yup from 'yup';
 
 function EditTutorial() {
     const { id } = useParams();
+    const navigate = useNavigate();
 
     const [tutorial, setTutorial] = useState({
         title: "",
@@ -35,6 +36,7 @@ function EditTutorial() {
             http.put(`/tutorial/${id}`, data)
                 .then((res) => {
                     console.log(res.data);
+                    navigate("/tutorials");
                 });
         }
     });
