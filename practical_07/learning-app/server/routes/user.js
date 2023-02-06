@@ -16,7 +16,6 @@ router.post("/register", async (req, res) => {
         await validationSchema.validate(data, { abortEarly: false });
     }
     catch (err) {
-        console.error(err);
         res.status(400).json({ errors: err.errors });
         return;
     }
