@@ -3,6 +3,8 @@ const router = express.Router();
 const bcrypt = require('bcrypt');
 const { User } = require('../models');
 const yup = require("yup");
+const { sign } = require('jsonwebtoken');
+require('dotenv').config();
 
 router.post("/register", async (req, res) => {
     let data = req.body;
@@ -72,7 +74,9 @@ router.post("/login", async (req, res) => {
         email: user.email,
         name: user.name
     };
+    let accessToken = sign(userInfo, process.env.APP_SECRET);
     res.json({
+        accessToken: accessToken,
         user: userInfo
     });
 });
