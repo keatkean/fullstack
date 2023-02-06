@@ -38,6 +38,18 @@ router.post("/register", async (req, res) => {
 
 router.post("/login", async (req, res) => {
     let data = req.body;
+    // Validate request body
+    let validationSchema = yup.object().shape({
+        email: yup.string().email().max(50).required(),
+        password: yup.string().min(8).max(50).required()
+    })
+    try {
+        await validationSchema.validate(data, { abortEarly: false });
+    }
+    catch (err) {
+        res.status(400).json({ errors: err.errors });
+        return;
+    }
 
     // Check email and password
     let errorMsg = "Email or password is not correct.";
