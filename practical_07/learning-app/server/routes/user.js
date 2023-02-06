@@ -36,4 +36,33 @@ router.post("/register", async (req, res) => {
     res.json(result);
 });
 
+router.post("/login", async (req, res) => {
+    let data = req.body;
+
+    // Check email and password
+    let errorMsg = "Email or password is not correct.";
+    let user = await User.findOne({
+        where: { email: data.email }
+    });
+    if (!user) {
+        res.status(400).json({ message: errorMsg });
+        return;
+    }
+    let match = await bcrypt.compare(data.password, user.password);
+    if (!match) {
+        res.status(400).json({ message: errorMsg });
+        return;
+    }
+
+    // Return user info
+    let userInfo = {
+        id: user.id,
+        email: user.email,
+        name: user.name
+    };
+    res.json({
+        user: userInfo
+    });
+});
+
 module.exports = router;
