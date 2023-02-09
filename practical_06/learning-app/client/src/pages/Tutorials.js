@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Box, Typography, Grid, Card, CardContent, Input, IconButton, Button } from '@mui/material';
 import { AccessTime, Search, Clear, Edit } from '@mui/icons-material';
 import http from '../http';
-import moment from 'moment';
+import dayjs from 'dayjs';
 
 function Tutorials() {
     const [tutorialList, setTutorialList] = useState([]);
@@ -92,7 +92,7 @@ function Tutorials() {
                                             color="text.secondary">
                                             <AccessTime sx={{ mr: 1 }} />
                                             <Typography>
-                                                {moment(tutorial.createdAt).format(process.env.REACT_APP_DATETIME_FORMAT)}
+                                                {dayjs(tutorial.createdAt).format(process.env.REACT_APP_DATETIME_FORMAT)}
                                             </Typography>
                                         </Box>
                                         <Typography>
