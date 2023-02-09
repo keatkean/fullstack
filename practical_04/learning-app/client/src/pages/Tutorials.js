@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Box, Typography, Grid, Card, CardContent } from '@mui/material';
 import { AccessTime } from '@mui/icons-material';
 import http from '../http';
-import moment from 'moment';
+import dayjs from 'dayjs';
 
 function Tutorials() {
     const [tutorialList, setTutorialList] = useState([]);
@@ -34,7 +34,7 @@ function Tutorials() {
                                             color="text.secondary">
                                             <AccessTime sx={{ mr: 1 }} />
                                             <Typography>
-                                                {moment(tutorial.createdAt).format(process.env.REACT_APP_DATETIME_FORMAT)}
+                                                {dayjs(tutorial.createdAt).format(process.env.REACT_APP_DATETIME_FORMAT)}
                                             </Typography>
                                         </Box>
                                         <Typography>
