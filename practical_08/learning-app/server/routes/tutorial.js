@@ -2,8 +2,9 @@ const express = require('express');
 const router = express.Router();
 const { Tutorial, Sequelize } = require('../models');
 const yup = require("yup");
+const { validateToken } = require('../middlewares/auth');
 
-router.post("/", async (req, res) => {
+router.post("/", validateToken, async (req, res) => {
     let data = req.body;
     // Validate request body
     let validationSchema = yup.object().shape({
@@ -19,6 +20,7 @@ router.post("/", async (req, res) => {
         return;
     }
 
+    data.userId = req.user.id;
     let result = await Tutorial.create(data);
     res.json(result);
 });

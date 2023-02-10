@@ -9,5 +9,13 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false
         }
     });
+
+    Tutorial.associate = (models) => {
+        Tutorial.belongsTo(models.User, {
+            foreignKey: "userId",
+            as: 'user'
+        });
+    };
+
     return Tutorial;
 }
