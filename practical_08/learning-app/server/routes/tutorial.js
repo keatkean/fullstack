@@ -55,12 +55,19 @@ router.get("/:id", async (req, res) => {
     res.json(tutorial);
 });
 
-router.put("/:id", async (req, res) => {
+router.put("/:id", validateToken, async (req, res) => {
     let id = req.params.id;
     // Check id not found
     let tutorial = await Tutorial.findByPk(id);
     if (!tutorial) {
         res.sendStatus(404);
+        return;
+    }
+    
+    // Check request user id
+    let userId = req.user.id;
+    if (tutorial.userId != userId) {
+        res.sendStatus(403);
         return;
     }
     
@@ -94,7 +101,7 @@ router.put("/:id", async (req, res) => {
     }
 });
 
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", validateToken, async (req, res) => {
     let id = req.params.id;
     // Check id not found
     let tutorial = await Tutorial.findByPk(id);
@@ -103,6 +110,13 @@ router.delete("/:id", async (req, res) => {
         return;
     }
 
+    // Check request user id
+    let userId = req.user.id;
+    if (tutorial.userId != userId) {
+        res.sendStatus(403);
+        return;
+    }
+    
     let num = await Tutorial.destroy({
         where: { id: id }
     })
