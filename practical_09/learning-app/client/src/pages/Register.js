@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import http from '../http';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Register() {
     const navigate = useNavigate();
@@ -39,7 +41,7 @@ function Register() {
                     navigate("/login");
                 })
                 .catch(function (err) {
-                    console.log(err.response);
+                    toast.error(`${err.response.data.message}`);
                 });
         }
     });
@@ -97,6 +99,8 @@ function Register() {
                     Register
                 </Button>
             </Box>
+
+            <ToastContainer />
         </Box>
     );
 }
