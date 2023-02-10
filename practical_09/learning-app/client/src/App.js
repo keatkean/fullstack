@@ -5,6 +5,7 @@ import Tutorials from './pages/Tutorials';
 import AddTutorial from './pages/AddTutorial';
 import EditTutorial from './pages/EditTutorial';
 import Register from './pages/Register';
+import Login from './pages/Login';
 
 function App() {
   return (
@@ -32,7 +33,7 @@ function App() {
           <Route path={"/addtutorial"} element={<AddTutorial />} />
           <Route path={"/edittutorial/:id"} element={<EditTutorial />} />
           <Route path={"/register"} element={<Register />} />
-          <Route path={"/login"} />
+          <Route path={"/login"} element={<Login />} />
         </Routes>
       </Container>
     </Router>
