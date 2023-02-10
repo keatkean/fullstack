@@ -1,5 +1,5 @@
 import './App.css';
-import { Container, AppBar, Toolbar, Typography } from '@mui/material';
+import { Container, AppBar, Toolbar, Typography, Box } from '@mui/material';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Tutorials from './pages/Tutorials';
 import AddTutorial from './pages/AddTutorial';
@@ -17,6 +17,9 @@ function App() {
               </Typography>
             </Link>
             <Link to="/tutorials" ><Typography>Tutorials</Typography></Link>
+            <Box sx={{ flexGrow: 1 }}></Box>
+            <Link to="/register" ><Typography>Register</Typography></Link>
+            <Link to="/login" ><Typography>Login</Typography></Link>
           </Toolbar>
         </Container>
       </AppBar>
@@ -27,6 +30,8 @@ function App() {
           <Route path={"/tutorials"} element={<Tutorials />} />
           <Route path={"/addtutorial"} element={<AddTutorial />} />
           <Route path={"/edittutorial/:id"} element={<EditTutorial />} />
+          <Route path={"/register"} />
+          <Route path={"/login"} />
         </Routes>
       </Container>
     </Router>
