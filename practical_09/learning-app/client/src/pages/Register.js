@@ -54,26 +54,43 @@ function Register() {
             <Typography variant="h5" sx={{ my: 2 }}>
                 Register
             </Typography>
-            <Box component="form" sx={{ maxWidth: '500px' }}>
+            <Box component="form" sx={{ maxWidth: '500px' }}
+                onSubmit={formik.handleSubmit}>
                 <TextField
                     fullWidth margin="normal" autoComplete="off"
                     label="Name"
                     name="name"
+                    value={formik.values.name}
+                    onChange={formik.handleChange}
+                    error={formik.touched.name && Boolean(formik.errors.name)}
+                    helperText={formik.touched.name && formik.errors.name}
                 />
                 <TextField
                     fullWidth margin="normal" autoComplete="off"
                     label="Email"
                     name="email"
+                    value={formik.values.email}
+                    onChange={formik.handleChange}
+                    error={formik.touched.email && Boolean(formik.errors.email)}
+                    helperText={formik.touched.email && formik.errors.email}
                 />
                 <TextField
                     fullWidth margin="normal" autoComplete="off"
                     label="Password"
                     name="password" type="password"
+                    value={formik.values.password}
+                    onChange={formik.handleChange}
+                    error={formik.touched.password && Boolean(formik.errors.password)}
+                    helperText={formik.touched.password && formik.errors.password}
                 />
                 <TextField
                     fullWidth margin="normal" autoComplete="off"
                     label="Confirm Password"
                     name="confirmPassword" type="password"
+                    value={formik.values.confirmPassword}
+                    onChange={formik.handleChange}
+                    error={formik.touched.confirmPassword && Boolean(formik.errors.confirmPassword)}
+                    helperText={formik.touched.confirmPassword && formik.errors.confirmPassword}
                 />
                 <Button fullWidth variant="contained" sx={{ mt: 2 }}
                     type="submit">
