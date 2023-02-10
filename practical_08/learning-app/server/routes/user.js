@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt');
 const { User } = require('../models');
 const yup = require("yup");
 const { sign } = require('jsonwebtoken');
+const { validateToken } = require('../middlewares/auth');
 require('dotenv').config();
 
 router.post("/register", async (req, res) => {
@@ -77,6 +78,17 @@ router.post("/login", async (req, res) => {
     let accessToken = sign(userInfo, process.env.APP_SECRET);
     res.json({
         accessToken: accessToken,
+        user: userInfo
+    });
+});
+
+router.get("/auth", validateToken, (req, res) => {
+    let userInfo = {
+        id: req.user.id,
+        email: req.user.email,
+        name: req.user.name
+    };
+    res.json({
         user: userInfo
     });
 });
