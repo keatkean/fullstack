@@ -1,5 +1,6 @@
 import './App.css';
-import { Container, AppBar, Toolbar, Typography, Box } from '@mui/material';
+import { useState, useEffect } from 'react';
+import { Container, AppBar, Toolbar, Typography, Box, Button } from '@mui/material';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Tutorials from './pages/Tutorials';
 import AddTutorial from './pages/AddTutorial';
@@ -8,6 +9,20 @@ import Register from './pages/Register';
 import Login from './pages/Login';
 
 function App() {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    if (localStorage.getItem("accessToken")) {
+      // Todo: get user data from server
+      setUser({ name: 'User' });
+    }
+  }, []);
+
+  const logout = () => {
+    localStorage.clear();
+    window.location = "/";
+  };
+
   return (
     <Router>
       <AppBar position="static" className="AppBar">
@@ -20,8 +35,19 @@ function App() {
             </Link>
             <Link to="/tutorials" ><Typography>Tutorials</Typography></Link>
             <Box sx={{ flexGrow: 1 }}></Box>
-            <Link to="/register" ><Typography>Register</Typography></Link>
-            <Link to="/login" ><Typography>Login</Typography></Link>
+            {user && (
+              <>
+                <Typography>{user.name}</Typography>
+                <Button onClick={logout}>Logout</Button>
+              </>
+            )
+            }
+            {!user && (
+              <>
+                <Link to="/register" ><Typography>Register</Typography></Link>
+                <Link to="/login" ><Typography>Login</Typography></Link>
+              </>
+            )}
           </Toolbar>
         </Container>
       </AppBar>

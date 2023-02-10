@@ -9,7 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 function Login() {
     const navigate = useNavigate();
-    
+
     const formik = useFormik({
         initialValues: {
             email: "",
@@ -28,7 +28,7 @@ function Login() {
         onSubmit: (data) => {
             http.post("/user/login", data)
                 .then((res) => {
-                    console.log(res.data);
+                    localStorage.setItem("accessToken", res.data.accessToken);
                     navigate("/");
                 })
                 .catch(function (err) {
