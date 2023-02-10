@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { Tutorial, Sequelize } = require('../models');
+const { User, Tutorial, Sequelize } = require('../models');
 const yup = require("yup");
 const { validateToken } = require('../middlewares/auth');
 
@@ -36,14 +36,17 @@ router.get("/", async (req, res) => {
 
     let list = await Tutorial.findAll({
         where: condition,
-        order: [['createdAt', 'DESC']]
+        order: [['createdAt', 'DESC']],
+        include: { model: User, as: "user", attributes: ['name'] }
     });
     res.json(list);
 });
 
 router.get("/:id", async (req, res) => {
     let id = req.params.id;
-    let tutorial = await Tutorial.findByPk(id);
+    let tutorial = await Tutorial.findByPk(id, {
+        include: { model: User, as: "user", attributes: ['name'] }
+    });
     // Check id not found
     if (!tutorial) {
         res.sendStatus(404);
