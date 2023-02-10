@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Tutorials from './pages/Tutorials';
 import AddTutorial from './pages/AddTutorial';
 import EditTutorial from './pages/EditTutorial';
+import Register from './pages/Register';
 
 function App() {
   return (
@@ -30,7 +31,7 @@ function App() {
           <Route path={"/tutorials"} element={<Tutorials />} />
           <Route path={"/addtutorial"} element={<AddTutorial />} />
           <Route path={"/edittutorial/:id"} element={<EditTutorial />} />
-          <Route path={"/register"} />
+          <Route path={"/register"} element={<Register />} />
           <Route path={"/login"} />
         </Routes>
       </Container>
