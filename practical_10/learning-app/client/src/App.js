@@ -7,14 +7,16 @@ import AddTutorial from './pages/AddTutorial';
 import EditTutorial from './pages/EditTutorial';
 import Register from './pages/Register';
 import Login from './pages/Login';
+import http from './http';
 
 function App() {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
     if (localStorage.getItem("accessToken")) {
-      // Todo: get user data from server
-      setUser({ name: 'User' });
+      http.get('/user/auth').then((res) => {
+        setUser(res.data.user);
+      });
     }
   }, []);
 
