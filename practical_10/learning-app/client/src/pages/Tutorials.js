@@ -65,16 +65,14 @@ function Tutorials() {
                     onClick={onClickClear}>
                     <Clear />
                 </IconButton>
+                <Box sx={{ flexGrow: 1 }} />
                 {
                     user && (
-                        <>
-                            <Box sx={{ flexGrow: 1 }} />
-                            <Link to="/addtutorial" style={{ textDecoration: 'none' }}>
-                                <Button variant='contained'>
-                                    Add
-                                </Button>
-                            </Link>
-                        </>
+                        <Link to="/addtutorial" style={{ textDecoration: 'none' }}>
+                            <Button variant='contained'>
+                                Add
+                            </Button>
+                        </Link>
                     )
                 }
             </Box>
@@ -90,17 +88,21 @@ function Tutorials() {
                                             <Typography variant="h6" sx={{ flexGrow: 1 }}>
                                                 {tutorial.title}
                                             </Typography>
-                                            <Link to={`/edittutorial/${tutorial.id}`}>
-                                                <IconButton color="primary" >
-                                                    <Edit />
-                                                </IconButton>
-                                            </Link>
+                                            {
+                                                user && user.id === tutorial.userId && (
+                                                    <Link to={`/edittutorial/${tutorial.id}`}>
+                                                        <IconButton color="primary" >
+                                                            <Edit />
+                                                        </IconButton>
+                                                    </Link>
+                                                )
+                                            }
                                         </Box>
                                         <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}
                                             color="text.secondary">
                                             <AccountCircle sx={{ mr: 1 }} />
                                             <Typography>
-                                            {tutorial.user.name}
+                                                {tutorial.user.name}
                                             </Typography>
                                         </Box>
                                         <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}
