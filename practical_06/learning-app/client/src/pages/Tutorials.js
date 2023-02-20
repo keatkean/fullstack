@@ -83,7 +83,7 @@ function Tutorials() {
                                                 {tutorial.title}
                                             </Typography>
                                             <Link to={`/edittutorial/${tutorial.id}`}>
-                                                <IconButton color="primary" >
+                                                <IconButton color="primary" sx={{ padding: '4px' }}>
                                                     <Edit />
                                                 </IconButton>
                                             </Link>

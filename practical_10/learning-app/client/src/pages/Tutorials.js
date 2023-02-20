@@ -91,7 +91,7 @@ function Tutorials() {
                                             {
                                                 user && user.id === tutorial.userId && (
                                                     <Link to={`/edittutorial/${tutorial.id}`}>
-                                                        <IconButton color="primary" >
+                                                        <IconButton color="primary" sx={{ padding: '4px' }}>
                                                             <Edit />
                                                         </IconButton>
                                                     </Link>
