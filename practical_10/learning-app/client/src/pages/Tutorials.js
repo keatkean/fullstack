@@ -1,13 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { Box, Typography, Grid, Card, CardContent, Input, IconButton, Button } from '@mui/material';
-import { AccessTime, Search, Clear, Edit } from '@mui/icons-material';
+import { AccountCircle, AccessTime, Search, Clear, Edit } from '@mui/icons-material';
 import http from '../http';
 import dayjs from 'dayjs';
+import UserContext from '../contexts/UserContext';
 
 function Tutorials() {
     const [tutorialList, setTutorialList] = useState([]);
     const [search, setSearch] = useState('');
+    const { user } = useContext(UserContext);
 
     const onSearchChange = (e) => {
         setSearch(e.target.value);
@@ -63,12 +65,18 @@ function Tutorials() {
                     onClick={onClickClear}>
                     <Clear />
                 </IconButton>
-                <Box sx={{ flexGrow: 1 }} />
-                <Link to="/addtutorial" style={{ textDecoration: 'none' }}>
-                    <Button variant='contained'>
-                        Add
-                    </Button>
-                </Link>
+                {
+                    user && (
+                        <>
+                            <Box sx={{ flexGrow: 1 }} />
+                            <Link to="/addtutorial" style={{ textDecoration: 'none' }}>
+                                <Button variant='contained'>
+                                    Add
+                                </Button>
+                            </Link>
+                        </>
+                    )
+                }
             </Box>
 
             <Grid container spacing={2}>
@@ -87,6 +95,13 @@ function Tutorials() {
                                                     <Edit />
                                                 </IconButton>
                                             </Link>
+                                        </Box>
+                                        <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}
+                                            color="text.secondary">
+                                            <AccountCircle sx={{ mr: 1 }} />
+                                            <Typography>
+                                            {tutorial.user.name}
+                                            </Typography>
                                         </Box>
                                         <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}
                                             color="text.secondary">
