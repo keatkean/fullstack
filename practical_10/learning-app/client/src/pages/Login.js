@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Box, Typography, TextField, Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
@@ -6,9 +6,11 @@ import * as yup from 'yup';
 import http from '../http';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import UserContext from '../contexts/UserContext';
 
 function Login() {
     const navigate = useNavigate();
+    const { setUser } = useContext(UserContext);
 
     const formik = useFormik({
         initialValues: {
@@ -29,8 +31,8 @@ function Login() {
             http.post("/user/login", data)
                 .then((res) => {
                     localStorage.setItem("accessToken", res.data.accessToken);
+                    setUser(res.data.user);
                     navigate("/");
-                    window.location.reload();
                 })
                 .catch(function (err) {
                     toast.error(`${err.response.data.message}`);
