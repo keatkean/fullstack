@@ -4,6 +4,8 @@ import { Box, Typography, TextField, Button, Grid } from '@mui/material';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import http from '../http';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function AddTutorial() {
     const navigate = useNavigate();
@@ -34,6 +36,11 @@ function AddTutorial() {
     const onFileChange = (e) => {
         let file = e.target.files[0];
         if (file) {
+            if (file.size > 1024 * 1024) {
+                toast.error('Maximum file size is 1MB');
+                return;
+            }
+
             let formData = new FormData();
             formData.append('file', file);
             http.post('/file/upload', formData, {
@@ -94,6 +101,8 @@ function AddTutorial() {
                     </Button>
                 </Box>
             </Box>
+
+            <ToastContainer />
         </Box>
     );
 }
