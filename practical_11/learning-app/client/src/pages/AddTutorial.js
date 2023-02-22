@@ -26,6 +26,9 @@ function AddTutorial() {
                 .required('Description is required')
         }),
         onSubmit: (data) => {
+            if (imageFile) {
+                data.imageFile = imageFile;
+            }
             http.post("/tutorial", data)
                 .then((res) => {
                     console.log(res.data);

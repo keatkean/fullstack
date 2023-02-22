@@ -5,6 +5,7 @@ import { AccountCircle, AccessTime, Search, Clear, Edit } from '@mui/icons-mater
 import http from '../http';
 import dayjs from 'dayjs';
 import UserContext from '../contexts/UserContext';
+import AspectRatio from '@mui/joy/AspectRatio';
 
 function Tutorials() {
     const [tutorialList, setTutorialList] = useState([]);
@@ -83,7 +84,18 @@ function Tutorials() {
                         return (
                             <Grid item xs={12} md={6} lg={4} key={tutorial.id}>
                                 <Card>
+                                    {
+                                        tutorial.imageFile && (
+                                            <AspectRatio>
+                                                <Box component="img"
+                                                    src={`${process.env.REACT_APP_FILE_BASE_URL}${tutorial.imageFile}`}
+                                                    alt="tutorial">
+                                                </Box>
+                                            </AspectRatio>
+                                        )
+                                    }
                                     <CardContent>
+
                                         <Box sx={{ display: 'flex', mb: 1 }}>
                                             <Typography variant="h6" sx={{ flexGrow: 1 }}>
                                                 {tutorial.title}
