@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Box, Typography, TextField, Button, Grid } from '@mui/material';
+import AspectRatio from '@mui/joy/AspectRatio';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import http from '../http';
@@ -49,7 +50,7 @@ function AddTutorial() {
                 }
             })
                 .then((res) => {
-                    console.log(res.data);
+                    setImageFile(res.data.filename);
                 })
                 .catch(function (error) {
                     console.log(error.response);
@@ -93,6 +94,15 @@ function AddTutorial() {
                                     onChange={onFileChange} />
                             </Button>
                         </Box>
+                        {
+                            imageFile && (
+                                <AspectRatio sx={{ mt: 2 }}>
+                                    <Box component="img" alt="tutorial"
+                                        src={`${process.env.REACT_APP_FILE_BASE_URL}${imageFile}`}>
+                                    </Box>
+                                </AspectRatio>
+                            )
+                        }
                     </Grid>
                 </Grid>
                 <Box sx={{ mt: 2 }}>
