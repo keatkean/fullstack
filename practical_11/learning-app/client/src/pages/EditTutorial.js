@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Box, Typography, TextField, Button, Grid } from '@mui/material';
 import { Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@mui/material';
+import AspectRatio from '@mui/joy/AspectRatio';
 import http from '../http';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
@@ -16,6 +17,7 @@ function EditTutorial() {
         title: "",
         description: ""
     });
+    const [imageFile, setImageFile] = useState(null);
 
     useEffect(() => {
         http.get(`/tutorial/${id}`).then((res) => {
@@ -78,7 +80,7 @@ function EditTutorial() {
                 }
             })
                 .then((res) => {
-                    //setImageFile(res.data.filename);
+                    setImageFile(res.data.filename);
                 })
                 .catch(function (error) {
                     console.log(error.response);
@@ -121,6 +123,15 @@ function EditTutorial() {
                                 <input hidden accept="image/*" multiple type="file"
                                     onChange={onFileChange} />
                             </Button>
+                            {
+                                imageFile && (
+                                    <AspectRatio sx={{ mt: 2 }}>
+                                        <Box component="img" alt="tutorial"
+                                            src={`${process.env.REACT_APP_FILE_BASE_URL}${imageFile}`}>
+                                        </Box>
+                                    </AspectRatio>
+                                )
+                            }
                         </Box>
                     </Grid>
                 </Grid>
