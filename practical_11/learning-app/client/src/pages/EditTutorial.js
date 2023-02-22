@@ -22,6 +22,7 @@ function EditTutorial() {
     useEffect(() => {
         http.get(`/tutorial/${id}`).then((res) => {
             setTutorial(res.data);
+            setImageFile(res.data.imageFile);
         });
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
@@ -38,6 +39,9 @@ function EditTutorial() {
                 .required('Description is required')
         }),
         onSubmit: (data) => {
+            if (imageFile) {
+                data.imageFile = imageFile;
+            }
             http.put(`/tutorial/${id}`, data)
                 .then((res) => {
                     console.log(res.data);
