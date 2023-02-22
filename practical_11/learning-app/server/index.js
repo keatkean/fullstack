@@ -5,6 +5,8 @@ require('dotenv').config();
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(express.static('public'));
 
 // Simple Route
 app.get("/", (req, res) => {
@@ -16,6 +18,8 @@ const tutorialRoute = require('./routes/tutorial');
 app.use("/tutorial", tutorialRoute);
 const userRoute = require('./routes/user');
 app.use("/user", userRoute);
+const fileRoute = require('./routes/file');
+app.use("/file", fileRoute);
 
 const db = require('./models');
 db.sequelize.sync({ alter: true }).then(() => {
