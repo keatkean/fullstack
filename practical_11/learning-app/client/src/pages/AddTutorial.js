@@ -93,16 +93,16 @@ function AddTutorial() {
                                 <input hidden accept="image/*" multiple type="file"
                                     onChange={onFileChange} />
                             </Button>
+                            {
+                                imageFile && (
+                                    <AspectRatio sx={{ mt: 2 }}>
+                                        <Box component="img" alt="tutorial"
+                                            src={`${process.env.REACT_APP_FILE_BASE_URL}${imageFile}`}>
+                                        </Box>
+                                    </AspectRatio>
+                                )
+                            }
                         </Box>
-                        {
-                            imageFile && (
-                                <AspectRatio sx={{ mt: 2 }}>
-                                    <Box component="img" alt="tutorial"
-                                        src={`${process.env.REACT_APP_FILE_BASE_URL}${imageFile}`}>
-                                    </Box>
-                                </AspectRatio>
-                            )
-                        }
                     </Grid>
                 </Grid>
                 <Box sx={{ mt: 2 }}>
