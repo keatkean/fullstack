@@ -5,6 +5,8 @@ import { Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } 
 import http from '../http';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function EditTutorial() {
     const { id } = useParams();
@@ -60,6 +62,30 @@ function EditTutorial() {
             });
     }
 
+    const onFileChange = (e) => {
+        let file = e.target.files[0];
+        if (file) {
+            if (file.size > 1024 * 1024) {
+                toast.error('Maximum file size is 1MB');
+                return;
+            }
+
+            let formData = new FormData();
+            formData.append('file', file);
+            http.post('/file/upload', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            })
+                .then((res) => {
+                    //setImageFile(res.data.filename);
+                })
+                .catch(function (error) {
+                    console.log(error.response);
+                });
+        }
+    };
+
     return (
         <Box>
             <Typography variant="h5" sx={{ my: 2 }}>
@@ -92,7 +118,8 @@ function EditTutorial() {
                         <Box sx={{ textAlign: 'center', mt: 2 }} >
                             <Button variant="contained" component="label">
                                 Upload Image
-                                <input hidden accept="image/*" multiple type="file" />
+                                <input hidden accept="image/*" multiple type="file"
+                                    onChange={onFileChange} />
                             </Button>
                         </Box>
                     </Grid>
@@ -128,6 +155,8 @@ function EditTutorial() {
                     </Button>
                 </DialogActions>
             </Dialog>
+
+            <ToastContainer />
         </Box>
     );
 }
