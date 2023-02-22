@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Box, Typography, TextField, Button, Grid } from '@mui/material';
 import { useFormik } from 'formik';
@@ -7,6 +7,7 @@ import http from '../http';
 
 function AddTutorial() {
     const navigate = useNavigate();
+    const [imageFile, setImageFile] = useState(null);
 
     const formik = useFormik({
         initialValues: {
@@ -29,6 +30,25 @@ function AddTutorial() {
                 });
         }
     });
+
+    const onFileChange = (e) => {
+        let file = e.target.files[0];
+        if (file) {
+            let formData = new FormData();
+            formData.append('file', file);
+            http.post('/file/upload', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            })
+                .then((res) => {
+                    console.log(res.data);
+                })
+                .catch(function (error) {
+                    console.log(error.response);
+                });
+        }
+    };
 
     return (
         <Box>
@@ -62,7 +82,8 @@ function AddTutorial() {
                         <Box sx={{ textAlign: 'center', mt: 2 }} >
                             <Button variant="contained" component="label">
                                 Upload Image
-                                <input hidden accept="image/*" multiple type="file" />
+                                <input hidden accept="image/*" multiple type="file"
+                                    onChange={onFileChange} />
                             </Button>
                         </Box>
                     </Grid>
