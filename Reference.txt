@@ -19,6 +19,9 @@ https://github.com/machadop1407/FullStack-Course
 16 Update Password
 17 Deploying the Website
 
+Full React Tutorial by The Net Ninja
+https://www.youtube.com/watch?v=j942wKiXFu8&list=PL4cUxeGkcC9gZD-Tvwfod2gaISzfRiP9d
+
 Sequelize
 https://sequelize.org/docs/v6/core-concepts/model-basics/
 
