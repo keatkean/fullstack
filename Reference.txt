@@ -26,7 +26,7 @@ Git, GitHub, & GitHub Desktop for beginners
 https://www.youtube.com/watch?v=8Dd7KRpKeaE
 
 Full React Tutorial by The Net Ninja
-https://www.youtube.com/watch?v=j942wKiXFu8&list=PL4cUxeGkcC9gZD-Tvwfod2gaISzfRiP9d
+https://www.youtube.com/playlist?list=PL4cUxeGkcC9gZD-Tvwfod2gaISzfRiP9d
 
 Sequelize
 https://sequelize.org/docs/v6/core-concepts/model-basics/
