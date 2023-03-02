@@ -19,8 +19,8 @@ https://github.com/machadop1407/FullStack-Course
 16 Update Password
 17 Deploying the Website
 
-Figma For Beginners: Explore ideas
-https://www.youtube.com/watch?v=dXQ7IHkTiMM
+Figma for beginners
+https://www.youtube.com/playlist?list=PLXDU_eVOJTx7QHLShNqIXL1Cgbxj7HlN4
 
 Git, GitHub, & GitHub Desktop for beginners
 https://www.youtube.com/watch?v=8Dd7KRpKeaE
