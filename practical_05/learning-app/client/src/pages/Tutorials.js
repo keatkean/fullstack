@@ -31,7 +31,7 @@ function Tutorials() {
     }, []);
 
     const onSearchKeyDown = (e) => {
-        if (e.keyCode === 13) {
+        if (e.key === "Enter") {
             searchTutorials();
         }
     };
