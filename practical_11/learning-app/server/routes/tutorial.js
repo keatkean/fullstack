@@ -8,8 +8,8 @@ router.post("/", validateToken, async (req, res) => {
     let data = req.body;
     // Validate request body
     let validationSchema = yup.object().shape({
-        title: yup.string().max(100).required(),
-        description: yup.string().max(500).required()
+        title: yup.string().trim().min(3).max(100).required(),
+        description: yup.string().trim().min(3).max(500).required()
     });
     try {
         await validationSchema.validate(data, { abortEarly: false });
@@ -20,6 +20,8 @@ router.post("/", validateToken, async (req, res) => {
         return;
     }
 
+    data.title = data.title.trim();
+    data.description = data.description.trim();
     data.userId = req.user.id;
     let result = await Tutorial.create(data);
     res.json(result);
@@ -75,8 +77,8 @@ router.put("/:id", validateToken, async (req, res) => {
     let data = req.body;
     // Validate request body
     let validationSchema = yup.object().shape({
-        title: yup.string().max(100),
-        description: yup.string().max(500)
+        title: yup.string().trim().min(3).max(100),
+        description: yup.string().trim().min(3).max(500)
     });
     try {
         await validationSchema.validate(data, { abortEarly: false });
@@ -87,6 +89,8 @@ router.put("/:id", validateToken, async (req, res) => {
         return;
     }
 
+    data.title = data.title.trim();
+    data.description = data.description.trim();
     let num = await Tutorial.update(data, {
         where: { id: id }
     });
