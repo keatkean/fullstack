@@ -11,9 +11,9 @@ router.post("/register", async (req, res) => {
     let data = req.body;
     // Validate request body
     let validationSchema = yup.object().shape({
-        name: yup.string().min(3).max(50).required(),
-        email: yup.string().email().max(50).required(),
-        password: yup.string().min(8).max(50).required()
+        name: yup.string().trim().min(3).max(50).required(),
+        email: yup.string().trim().email().max(50).required(),
+        password: yup.string().trim().min(8).max(50).required()
     })
     try {
         await validationSchema.validate(data, { abortEarly: false });
@@ -22,6 +22,11 @@ router.post("/register", async (req, res) => {
         res.status(400).json({ errors: err.errors });
         return;
     }
+
+    // Trim string values
+    data.name = data.name.trim();
+    data.email = data.email.trim().toLowerCase();
+    data.password = data.password.trim();
 
     // Check email
     let user = await User.findOne({
@@ -43,8 +48,8 @@ router.post("/login", async (req, res) => {
     let data = req.body;
     // Validate request body
     let validationSchema = yup.object().shape({
-        email: yup.string().email().max(50).required(),
-        password: yup.string().min(8).max(50).required()
+        email: yup.string().trim().email().max(50).required(),
+        password: yup.string().trim().min(8).max(50).required()
     })
     try {
         await validationSchema.validate(data, { abortEarly: false });
@@ -53,6 +58,10 @@ router.post("/login", async (req, res) => {
         res.status(400).json({ errors: err.errors });
         return;
     }
+
+    // Trim string values
+    data.email = data.email.trim().toLowerCase();
+    data.password = data.password.trim();
 
     // Check email and password
     let errorMsg = "Email or password is not correct.";
