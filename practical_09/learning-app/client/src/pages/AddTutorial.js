@@ -24,6 +24,8 @@ function AddTutorial() {
                 .required('Description is required')
         }),
         onSubmit: (data) => {
+            data.title = data.title.trim();
+            data.description = data.description.trim();
             http.post("/tutorial", data)
                 .then((res) => {
                     console.log(res.data);

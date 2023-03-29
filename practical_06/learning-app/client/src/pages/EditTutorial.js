@@ -36,6 +36,8 @@ function EditTutorial() {
                 .required('Description is required')
         }),
         onSubmit: (data) => {
+            data.title = data.title.trim();
+            data.description = data.description.trim();
             http.put(`/tutorial/${id}`, data)
                 .then((res) => {
                     console.log(res.data);

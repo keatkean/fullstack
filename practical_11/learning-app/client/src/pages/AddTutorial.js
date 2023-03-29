@@ -31,6 +31,8 @@ function AddTutorial() {
             if (imageFile) {
                 data.imageFile = imageFile;
             }
+            data.title = data.title.trim();
+            data.description = data.description.trim();
             http.post("/tutorial", data)
                 .then((res) => {
                     console.log(res.data);

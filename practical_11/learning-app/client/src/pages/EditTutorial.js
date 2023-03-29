@@ -44,6 +44,8 @@ function EditTutorial() {
             if (imageFile) {
                 data.imageFile = imageFile;
             }
+            data.title = data.title.trim();
+            data.description = data.description.trim();
             http.put(`/tutorial/${id}`, data)
                 .then((res) => {
                     console.log(res.data);
