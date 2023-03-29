@@ -18,23 +18,26 @@ function Register() {
             confirmPassword: ""
         },
         validationSchema: yup.object().shape({
-            name: yup.string()
+            name: yup.string().trim()
                 .min(3, 'Name must be at least 3 characters')
                 .max(50, 'Name must be at most 50 characters')
                 .required('Name is required'),
-            email: yup.string()
+            email: yup.string().trim()
                 .email('Enter a valid email')
                 .max(50, 'Email must be at most 50 characters')
                 .required('Email is required'),
-            password: yup.string()
+            password: yup.string().trim()
                 .min(8, 'Password must be at least 8 characters')
                 .max(50, 'Password must be at most 50 characters')
                 .required('Password is required'),
-            confirmPassword: yup.string()
+            confirmPassword: yup.string().trim()
                 .required('Confirm password is required')
                 .oneOf([yup.ref('password'), null], 'Passwords must match')
         }),
         onSubmit: (data) => {
+            data.name = data.name.trim();
+            data.email = data.email.trim().toLowerCase();
+            data.password = data.password.trim();
             http.post("/user/register", data)
                 .then((res) => {
                     console.log(res.data);
