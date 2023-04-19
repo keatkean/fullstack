@@ -112,7 +112,7 @@ function Tutorials() {
                                                 {dayjs(tutorial.createdAt).format(process.env.REACT_APP_DATETIME_FORMAT)}
                                             </Typography>
                                         </Box>
-                                        <Typography>
+                                        <Typography sx={{ whiteSpace: 'pre-wrap' }}>
                                             {tutorial.description}
                                         </Typography>
                                     </CardContent>
