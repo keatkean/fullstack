@@ -19,6 +19,7 @@ function Register() {
         },
         validationSchema: yup.object().shape({
             name: yup.string().trim()
+                .matches(/^[a-z ,.'-]+$/i, 'Invalid name')
                 .min(3, 'Name must be at least 3 characters')
                 .max(50, 'Name must be at most 50 characters')
                 .required('Name is required'),

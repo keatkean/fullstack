@@ -11,7 +11,8 @@ router.post("/register", async (req, res) => {
     let data = req.body;
     // Validate request body
     let validationSchema = yup.object().shape({
-        name: yup.string().trim().min(3).max(50).required(),
+        name: yup.string().trim().matches(/^[a-z ,.'-]+$/i)
+            .min(3).max(50).required(),
         email: yup.string().trim().email().max(50).required(),
         password: yup.string().trim().min(8).max(50).required()
     })
