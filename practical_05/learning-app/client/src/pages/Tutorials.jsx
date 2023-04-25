@@ -4,6 +4,7 @@ import { Box, Typography, Grid, Card, CardContent, Input, IconButton, Button } f
 import { AccessTime, Search, Clear } from '@mui/icons-material';
 import http from '../http';
 import dayjs from 'dayjs';
+import global from '../global';
 
 function Tutorials() {
     const [tutorialList, setTutorialList] = useState([]);
@@ -85,7 +86,7 @@ function Tutorials() {
                                             color="text.secondary">
                                             <AccessTime sx={{ mr: 1 }} />
                                             <Typography>
-                                                {dayjs(tutorial.createdAt).format(process.env.REACT_APP_DATETIME_FORMAT)}
+                                                {dayjs(tutorial.createdAt).format(global.datetimeFormat)}
                                             </Typography>
                                         </Box>
                                         <Typography sx={{ whiteSpace: 'pre-wrap' }}>
