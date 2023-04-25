@@ -135,7 +135,7 @@ function EditTutorial() {
                                 imageFile && (
                                     <AspectRatio sx={{ mt: 2 }}>
                                         <Box component="img" alt="tutorial"
-                                            src={`${process.env.REACT_APP_FILE_BASE_URL}${imageFile}`}>
+                                            src={`${import.meta.env.VITE_FILE_BASE_URL}${imageFile}`}>
                                         </Box>
                                     </AspectRatio>
                                 )

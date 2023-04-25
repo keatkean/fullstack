@@ -6,6 +6,7 @@ import http from '../http';
 import dayjs from 'dayjs';
 import UserContext from '../contexts/UserContext';
 import AspectRatio from '@mui/joy/AspectRatio';
+import global from '../global';
 
 function Tutorials() {
     const [tutorialList, setTutorialList] = useState([]);
@@ -88,7 +89,7 @@ function Tutorials() {
                                         tutorial.imageFile && (
                                             <AspectRatio>
                                                 <Box component="img"
-                                                    src={`${process.env.REACT_APP_FILE_BASE_URL}${tutorial.imageFile}`}
+                                                    src={`${import.meta.env.VITE_FILE_BASE_URL}${tutorial.imageFile}`}
                                                     alt="tutorial">
                                                 </Box>
                                             </AspectRatio>
@@ -120,7 +121,7 @@ function Tutorials() {
                                             color="text.secondary">
                                             <AccessTime sx={{ mr: 1 }} />
                                             <Typography>
-                                                {dayjs(tutorial.createdAt).format(process.env.REACT_APP_DATETIME_FORMAT)}
+                                                {dayjs(tutorial.createdAt).format(global.datetimeFormat)}
                                             </Typography>
                                         </Box>
                                         <Typography sx={{ whiteSpace: 'pre-wrap' }}>
