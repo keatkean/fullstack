@@ -65,8 +65,8 @@ router.put("/:id", async (req, res) => {
     let data = req.body;
     // Validate request body
     let validationSchema = yup.object().shape({
-        title: yup.string().trim().min(3).max(100),
-        description: yup.string().trim().min(3).max(500)
+        title: yup.string().trim().min(3).max(100).required(),
+        description: yup.string().trim().min(3).max(500).required()
     });
     try {
         await validationSchema.validate(data, { abortEarly: false });
